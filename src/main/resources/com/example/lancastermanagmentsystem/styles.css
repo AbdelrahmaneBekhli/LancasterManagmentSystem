@@ -1,0 +1,30 @@
+@font-face {
+    font-family: "Origin Tech Demo";
+    src: url("fonts/OriginTech.ttf");
+}
+
+@font-face {
+    font-family: "Think Thick";
+    src: url("fonts/ThinkThick.ttf");
+}
+
+@font-face {
+    font-family: "Dishcek";
+    src: url("fonts/Dishcek.otf");
+}
+
+
+#logo{
+    -fx-font-family: 'Origin Tech Demo';
+}
+
+#loginComboBox{
+    -fx-font-family: 'serif';
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+}
+
+.loginButton{
+    -fx-font-family: 'Think Thick';
+    -fx-background-insets: 0 0 0 0, 0, 0, 0;
+}
