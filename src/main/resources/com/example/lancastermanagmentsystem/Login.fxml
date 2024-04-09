@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lancastermanagmentsystem.LoginController">
+   <center>
+      <GridPane style="-fx-background-color: #2b3336;" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="560.3979248046875" minHeight="10.0" prefHeight="560.3979248046875" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <GridPane prefHeight="561.0" prefWidth="427.0" style="-fx-background-color: #a3a3a3;" GridPane.columnIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="90.84552917480468" minHeight="10.0" prefHeight="90.84552917480468" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="214.13974609375" minHeight="10.0" prefHeight="121.18944091796875" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="381.1334289550781" minHeight="10.0" prefHeight="288.4105590820312" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <GridPane.margin>
+                  <Insets bottom="30.0" left="50.0" right="50.0" top="50.0" />
+               </GridPane.margin>
+               <children>
+                  <GridPane prefHeight="277.0" prefWidth="350.0" GridPane.rowIndex="2">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Button fx:id="one" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="loginButton" text="1" textAlignment="CENTER" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="Think Thick" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="four" alignment="TOP_CENTER" mnemonicParsing="false" prefWidth="50.0" styleClass="loginButton" text="4" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Think Thick" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="two" alignment="TOP_CENTER" mnemonicParsing="false" prefWidth="50.0" styleClass="loginButton" text="2" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="Think Thick" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="three" alignment="TOP_CENTER" mnemonicParsing="false" prefWidth="50.0" styleClass="loginButton" text="3" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="Think Thick" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="six" alignment="TOP_CENTER" mnemonicParsing="false" prefWidth="50.0" styleClass="loginButton" text="6" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Think Thick" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="five" alignment="TOP_CENTER" mnemonicParsing="false" prefWidth="50.0" styleClass="loginButton" text="5" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Think Thick" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="eight" alignment="TOP_CENTER" mnemonicParsing="false" prefWidth="50.0" styleClass="loginButton" text="8" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Think Thick" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="seven" alignment="TOP_CENTER" mnemonicParsing="false" prefWidth="50.0" styleClass="loginButton" text="7" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Think Thick" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="nine" alignment="TOP_CENTER" mnemonicParsing="false" prefWidth="50.0" styleClass="loginButton" text="9" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Think Thick" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="zero" alignment="CENTER" mnemonicParsing="false" prefWidth="50.0" styleClass="loginButton" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Think Thick" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="erase" alignment="CENTER" mnemonicParsing="false" prefWidth="50.0" styleClass="loginButton" text="&lt;" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Think Thick" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="confirm" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="✔" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="MS Reference Sans Serif" size="22.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="50.0" right="50.0" top="20.0" />
+                     </GridPane.margin>
+                  </GridPane>
+                  <ComboBox id="loginComboBox" fx:id="loginSelection" prefHeight="50.0" prefWidth="300.0" promptText="Select user" GridPane.halignment="CENTER">
+                     <GridPane.margin>
+                        <Insets left="45.0" right="45.0" />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <GridPane GridPane.rowIndex="1">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="55.05704345703125" minHeight="10.0" prefHeight="29.23282470703125" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="91.56717529296876" minHeight="10.0" prefHeight="91.56717529296876" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <GridPane prefHeight="46.0" prefWidth="429.0">
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <columnConstraints>
+                              <ColumnConstraints />
+                           </columnConstraints>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
+                                 <GridPane.margin>
+                                    <Insets left="45.0" top="13.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </GridPane>
+                        <PasswordField fx:id="password" alignment="CENTER" prefHeight="49.0" prefWidth="298.0" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="45.0" right="45.0" />
+                           </GridPane.margin>
+                        </PasswordField>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </center>
+   <bottom>
+      <GridPane prefHeight="50.0" style="-fx-background-color: #a3a3a3;" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text id="dateTime" fx:id="dateTime" strokeType="OUTSIDE" strokeWidth="0.0" text="01/04/2024 20:53">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Login" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Powered By" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets right="100.0" />
+               </GridPane.margin>
+            </Text>
+            <Text fx:id="logo" fill="#002061" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="logo" text="O" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+               <font>
+                  <Font name="Origin Tech Demo" size="50.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets right="50.0" />
+               </GridPane.margin>
+            </Text>
+         </children>
+      </GridPane>
+   </bottom>
+   <top>
+      <GridPane prefHeight="65.0" prefWidth="1284.0" style="-fx-background-color: #2b3336; -fx-border-color: #a3a3a3; -fx-border-width: 5; -fx-border-style: dotted solid dashed;" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text fill="#a3a3a3" strokeType="OUTSIDE" strokeWidth="0.0" text="Lancaster" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <font>
+                  <Font name="Arial Bold" size="45.0" />
+               </font>
+            </Text>
+            <Text fill="#a3a3a3" strokeType="OUTSIDE" strokeWidth="0.0" text="User:">
+               <font>
+                  <Font name="Arial Bold" size="25.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <rotationAxis>
+            <Point3D />
+         </rotationAxis>
+      </GridPane>
+   </top>
+</BorderPane>
