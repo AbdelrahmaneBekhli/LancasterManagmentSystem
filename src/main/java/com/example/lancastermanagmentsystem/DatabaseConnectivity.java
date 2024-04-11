@@ -17,17 +17,13 @@ public class DatabaseConnectivity {
     private PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
-    private String host = "smcse-stuproj00.city.ac.uk";
-    private int port = 3306;
-    private String dbName = "in2033t15";
-    private String username = "in2033t15_d";
-    private String password = "PH5HsLF6q2o";
+    private static String host = "smcse-stuproj00.city.ac.uk";
+    private static int port = 3306;
+    private static String dbName = "in2033t15";
+    private static String username = "in2033t15_d";
+    private static String password = "PH5HsLF6q2o";
 
-    public DatabaseConnectivity() {
-        startConnection();
-    }
-
-    public void startConnection() {
+    public static boolean startConnection() {
         connection = null;
 
         try {
@@ -36,13 +32,13 @@ public class DatabaseConnectivity {
 
             if (connection != null) {
                 System.out.println("Connected to the database");
-            } else {
-                System.out.println("Failed to connect");
+                return true;
             }
 
         } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException(e);
+            return false;
         }
+        return false;
     }
 
     public static List<String[]> retrieveLogin() {
