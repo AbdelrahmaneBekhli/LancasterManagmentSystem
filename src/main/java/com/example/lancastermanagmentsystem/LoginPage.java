@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
@@ -42,11 +43,12 @@ public class LoginPage extends Application {
         Scene scene = new Scene(loginFxml, 1280, 720);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("styles.css")).toExternalForm());
 
-
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/Lancasters-logo.png"))));
         stage.setTitle("Lancaster");
-        stage.setScene(scene);
-        stage.show();
+        if(LoginController.launch) {
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     public static double get_width(){
@@ -58,7 +60,7 @@ public class LoginPage extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+            launch();
     }
 
     public static void setLoginPage() throws IOException {

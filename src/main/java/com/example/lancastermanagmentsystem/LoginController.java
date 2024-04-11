@@ -34,13 +34,26 @@ public class LoginController implements Initializable {
     @FXML
     PasswordField password;
 
+    public static boolean launch;
+
     private String[] users = {"Owner", "Manager", "Admin", "Sommelier"};;
 
     public static String user;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        List<String[]> users = DatabaseConnectivity.retrieveLogin();
+        List<String[]> users = new ArrayList<>();
+        if(DatabaseConnectivity.startConnection()){
+            users = DatabaseConnectivity.retrieveLogin();
+            launch = true;
+        } else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Database Connection Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to connect to database, check correct VPN is used.");
+            alert.showAndWait();
+            launch = false;
+        }
         ArrayList<String> logins = new ArrayList<>();
 
         for (String[] user : users) {
