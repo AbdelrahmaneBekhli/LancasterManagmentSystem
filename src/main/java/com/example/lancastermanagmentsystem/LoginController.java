@@ -68,7 +68,7 @@ public class LoginController implements Initializable {
         dateTime.setText(now.format(formatter));
 
         Timeline timeline = new Timeline(
-                new KeyFrame(javafx.util.Duration.seconds(1), event -> updateDateTime())
+                new KeyFrame(javafx.util.Duration.seconds(1), event -> LoginPage.updateDateTime(dateTime))
         );
         timeline.setCycleCount(Animation.INDEFINITE); // Run indefinitely
         timeline.play();
@@ -137,10 +137,4 @@ public class LoginController implements Initializable {
         password.appendText(character);
     }
 
-    // Method to update the date and time
-    private void updateDateTime() {
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        dateTime.setText(now.format(formatter));
-    }
 }
