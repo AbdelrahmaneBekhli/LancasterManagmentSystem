@@ -1,35 +1,17 @@
 package com.example.lancastermanagmentsystem;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Region;
-import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class LoginPage extends Application {
 
@@ -38,6 +20,30 @@ public class LoginPage extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+//
+//        ArrayList<DishInfo> firstCourse = new ArrayList<>();
+//        ArrayList<DishInfo> secondCourse = new ArrayList<>();
+//        ArrayList<DishInfo> thirdCourse = new ArrayList<>();
+//
+//        for (int i = 0; i < 4; i++) {
+//            DishInfo dish = new DishInfo("Dish name", 12, "Description", "recommended wine");
+//            firstCourse.add(dish);
+//        }
+//        for (int i = 0; i < 4; i++) {
+//            DishInfo dish = new DishInfo("Dish name", 12, "Description", "recommended wine");
+//            secondCourse.add(dish);
+//        }
+//        for (int i = 0; i < 4; i++) {
+//            DishInfo dish = new DishInfo("Dish name", 12, "Description", "recommended wine");
+//            thirdCourse.add(dish);
+//        }
+//
+//        PDFWriter p = new PDFWriter();
+//        p.addFirstCourse(firstCourse);
+//        p.addSecondCourse(secondCourse);
+//        p.addThirdCourse(thirdCourse);
+//        p.generatePdf();
+
         LoginPage.stage = stage;
         Parent loginFxml = new FXMLLoader(getClass().getResource("login.fxml")).load();
         Scene scene = new Scene(loginFxml, 1280, 720);
@@ -70,11 +76,34 @@ public class LoginPage extends Application {
         stage.setScene(loginScene);
     }
 
+    public static void setMenusMenu() throws IOException {
+        Parent loginFxml = new FXMLLoader(LoginPage.class.getResource("MenusMenu.fxml")).load();
+        Scene loginScene = new Scene(loginFxml, get_width(), get_height());
+        loginScene.getStylesheets().add(Objects.requireNonNull(LoginPage.class.getResource("styles.css")).toExternalForm());
+        stage.setScene(loginScene);
+    }
+
     public static void setAdminPage() throws IOException {
         Parent adminFxml = new FXMLLoader(LoginPage.class.getResource("AdminMenu.fxml")).load();
         Scene adminScene = new Scene(adminFxml, get_width(), get_height());
         adminScene.getStylesheets().add(Objects.requireNonNull(LoginPage.class.getResource("styles.css")).toExternalForm());
         stage.setScene(adminScene);
     }
+
+    public static void setSupplierPage() throws IOException {
+        Parent adminFxml = new FXMLLoader(LoginPage.class.getResource("SupplierMenu.fxml")).load();
+        Scene adminScene = new Scene(adminFxml, get_width(), get_height());
+        adminScene.getStylesheets().add(Objects.requireNonNull(LoginPage.class.getResource("styles.css")).toExternalForm());
+        stage.setScene(adminScene);
+    }
+
+    // Method to update the date and time
+    static Text updateDateTime(Text dateTime) {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        dateTime.setText(now.format(formatter));
+        return dateTime;
+    }
+
 
 }
