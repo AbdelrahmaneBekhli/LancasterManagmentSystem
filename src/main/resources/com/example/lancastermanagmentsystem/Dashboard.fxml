@@ -153,9 +153,9 @@
          <children>
             <AnchorPane prefHeight="570.0" prefWidth="811.0">
                <children>
-                  <ImageView fitHeight="131.0" fitWidth="465.0" layoutX="92.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="131.0" fitWidth="465.0" layoutX="91.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/New%20Project%20(7)-modified.png" />
+                        <Image url="@images/dashboardBanner.png" />
                      </image>
                   </ImageView>
                   <LineChart fx:id="earningsGraph" layoutX="52.0" layoutY="115.0" prefHeight="410.0" prefWidth="682.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="115.0">
