@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.PasswordField?>
@@ -16,6 +17,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -94,8 +96,8 @@
                         <Font name="Dishcek" size="34.0" />
                      </font>
                   </Text>
-                  <PasswordField layoutX="364.0" layoutY="206.0" prefHeight="49.0" prefWidth="285.0" />
-                  <Button layoutX="556.0" layoutY="288.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="93.0" text="Create" />
+                  <PasswordField fx:id="setPasswordField" layoutX="364.0" layoutY="206.0" prefHeight="49.0" prefWidth="285.0" />
+                  <Button fx:id="passwordCreate" layoutX="556.0" layoutY="288.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="93.0" text="Create" />
                   <Button layoutX="364.0" layoutY="288.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="93.0" text="Back" />
                </children>
             </AnchorPane>
@@ -110,17 +112,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Role" GridPane.columnIndex="2" GridPane.valignment="TOP">
-                     <font>
-                        <Font name="Dishcek" size="20.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets left="20.0" top="8.0" />
-                     </GridPane.margin>
-                  </Text>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" GridPane.valignment="TOP">
                      <font>
                         <Font name="Dishcek" size="20.0" />
@@ -137,17 +130,12 @@
                         <Insets left="20.0" top="8.0" />
                      </GridPane.margin>
                   </Text>
-                  <TextField prefHeight="48.0" prefWidth="283.0">
+                  <TextField fx:id="editName" prefHeight="48.0" prefWidth="283.0">
                      <GridPane.margin>
                         <Insets left="10.0" right="50.0" />
                      </GridPane.margin>
                   </TextField>
-                  <ComboBox prefHeight="48.0" prefWidth="400.0" GridPane.columnIndex="2">
-                     <GridPane.margin>
-                        <Insets left="10.0" right="50.0" />
-                     </GridPane.margin>
-                  </ComboBox>
-                  <TextField prefHeight="48.0" prefWidth="283.0" GridPane.columnIndex="1">
+                  <TextField fx:id="editSurname" prefHeight="48.0" prefWidth="283.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" right="50.0" />
                      </GridPane.margin>
@@ -160,7 +148,7 @@
                         <Insets left="20.0" top="8.0" />
                      </GridPane.margin>
                   </Text>
-                  <TextField prefHeight="48.0" prefWidth="283.0" GridPane.rowIndex="1">
+                  <TextField fx:id="editNumber" prefHeight="48.0" prefWidth="283.0" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" right="50.0" />
                      </GridPane.margin>
@@ -173,12 +161,12 @@
                         <Insets left="20.0" top="8.0" />
                      </GridPane.margin>
                   </Text>
-                  <TextField prefHeight="48.0" prefWidth="283.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="editEmail" prefHeight="48.0" prefWidth="283.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" right="50.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gender" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth" GridPane.columnIndex="2" GridPane.valignment="TOP">
                      <font>
                         <Font name="Dishcek" size="20.0" />
                      </font>
@@ -186,64 +174,12 @@
                         <Insets left="20.0" top="8.0" />
                      </GridPane.margin>
                   </Text>
-                  <ComboBox prefHeight="48.0" prefWidth="400.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets left="10.0" right="50.0" />
-                     </GridPane.margin>
-                  </ComboBox>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Postcode" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
-                     <font>
-                        <Font name="Dishcek" size="20.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets left="20.0" top="8.0" />
-                     </GridPane.margin>
-                  </Text>
-                  <TextField prefHeight="48.0" prefWidth="400.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets left="10.0" right="50.0" />
-                     </GridPane.margin>
-                  </TextField>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="County" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
-                     <font>
-                        <Font name="Dishcek" size="20.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets left="20.0" top="8.0" />
-                     </GridPane.margin>
-                  </Text>
-                  <TextField prefHeight="48.0" prefWidth="283.0" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets left="10.0" right="50.0" />
-                     </GridPane.margin>
-                  </TextField>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address" GridPane.rowIndex="2" GridPane.valignment="TOP">
-                     <font>
-                        <Font name="Dishcek" size="20.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets left="20.0" top="8.0" />
-                     </GridPane.margin>
-                  </Text>
-                  <TextField prefHeight="48.0" prefWidth="283.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets left="10.0" right="50.0" />
-                     </GridPane.margin>
-                  </TextField>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth" GridPane.rowIndex="3" GridPane.valignment="TOP">
-                     <font>
-                        <Font name="Dishcek" size="20.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets left="20.0" top="8.0" />
-                     </GridPane.margin>
-                  </Text>
-                  <DatePicker prefHeight="48.0" prefWidth="283.0" GridPane.rowIndex="3">
+                  <DatePicker fx:id="editDob" prefHeight="48.0" prefWidth="300.0" GridPane.columnIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" right="50.0" />
                      </GridPane.margin>
                   </DatePicker>
-                  <Text layoutX="383.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Allowed Holidays" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Remaing Holidays" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font name="Dishcek" size="20.0" />
                      </font>
@@ -251,12 +187,27 @@
                         <Insets left="20.0" top="8.0" />
                      </GridPane.margin>
                   </Text>
-                  <TextField layoutX="373.0" layoutY="343.0" prefHeight="48.0" prefWidth="283.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <TextField fx:id="editRemainingHolidays" prefHeight="48.0" prefWidth="283.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" right="50.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Postcode" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                  <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="58.0" prefWidth="172.0" text="Save" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <Button fx:id="editCancel" layoutX="805.0" layoutY="494.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="172.0" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <CheckBox fx:id="editHolidays" mnemonicParsing="false" prefWidth="169.0" text="On Holiday" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Dishcek" size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </CheckBox>
+                  <ComboBox fx:id="rolesSelection" prefHeight="48.0" prefWidth="291.0" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="10.0" right="50.0" />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Role" GridPane.rowIndex="2" GridPane.valignment="TOP">
                      <font>
                         <Font name="Dishcek" size="20.0" />
                      </font>
@@ -264,59 +215,71 @@
                         <Insets left="20.0" top="8.0" />
                      </GridPane.margin>
                   </Text>
-                  <TextField prefHeight="48.0" prefWidth="283.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                  <Text layoutX="382.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                     <font>
+                        <Font name="Dishcek" size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="20.0" top="8.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <PasswordField fx:id="passwordField" prefHeight="48.0" prefWidth="283.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" right="50.0" />
                      </GridPane.margin>
-                  </TextField>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="172.0" text="Save" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                  <Button layoutX="805.0" layoutY="494.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="172.0" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                  </PasswordField>
                </children>
             </GridPane>
             <AnchorPane fx:id="staffTablePane" prefHeight="570.0" prefWidth="716.0">
                <children>
                   <TableView fx:id="staffTable" layoutX="13.0" layoutY="32.0" prefHeight="432.0" prefWidth="1027.0" AnchorPane.bottomAnchor="106.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="32.0">
                      <columns>
-                        <TableColumn fx:id="ID" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="60.0" text="ID" />
-                        <TableColumn fx:id="Name" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="92.0" text="Name" />
-                        <TableColumn fx:id="Surname" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="92.0" text="Surname" />
-                        <TableColumn fx:id="Role" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="92.0" text="Role" />
-                        <TableColumn fx:id="Gender" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="92.0" text="Gender" />
-                        <TableColumn fx:id="DateOfBirth" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="92.0" text="Date of Birth" />
-                        <TableColumn fx:id="Address" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="92.0" text="Address" />
-                        <TableColumn fx:id="Postcode" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="92.0" text="Postcode" />
-                        <TableColumn fx:id="Quantity" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="92.0" text="County" />
-                        <TableColumn fx:id="onHoliday" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="92.0" text="onHoliday" />
-                        <TableColumn fx:id="RemainingHoliday" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="126.0" text="Remaing holiday" />
+                        <TableColumn id="table-column" fx:id="ID" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="128.0" text="ID" />
+                        <TableColumn id="table-column" fx:id="Name" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="128.0" text="Name" />
+                        <TableColumn id="table-column" fx:id="Surname" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="128.0" text="Surname" />
+                        <TableColumn id="table-column" fx:id="PhoneNumber" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="128.0" text="phoneNumber" />
+                        <TableColumn id="table-column" fx:id="Email" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="128.0" text="Email" />
+                        <TableColumn id="table-column" fx:id="DateOfBirth" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="128.0" text="Date of Birth" />
+                        <TableColumn id="table-column" fx:id="onHoliday" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="128.0" text="onHoliday" />
+                        <TableColumn id="table-column" fx:id="RemainingHoliday" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="128.0" text="Remaing holiday" />
                      </columns>
                      <effect>
                         <InnerShadow />
                      </effect>
                   </TableView>
-                  <Text layoutX="14.0" layoutY="517.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available Staff:" AnchorPane.bottomAnchor="46.90399932861328" AnchorPane.leftAnchor="14.0">
+                  <Text fx:id="availableStaff" layoutX="14.0" layoutY="517.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available Staff:" AnchorPane.bottomAnchor="46.90399932861328" AnchorPane.leftAnchor="14.0">
                      <font>
                         <Font name="Dishcek" size="24.0" />
                      </font>
                   </Text>
-                  <AnchorPane layoutX="677.0" layoutY="480.0" prefHeight="89.0" prefWidth="453.0" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="5.0">
+                  <AnchorPane fx:id="sideButtons" layoutX="677.0" layoutY="480.0" prefHeight="89.0" prefWidth="453.0" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="5.0">
                      <children>
-                        <Button layoutX="300.0" layoutY="14.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="124.0" text="Create" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="14.0">
+                        <Button fx:id="createStaff" layoutX="300.0" layoutY="14.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="124.0" text="Create" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="14.0">
                            <effect>
                               <InnerShadow blurType="ONE_PASS_BOX" height="10.0" radius="5.75" width="15.0" />
                            </effect>
                         </Button>
-                        <Button layoutX="180.0" layoutY="14.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="124.0" text="Edit" AnchorPane.bottomAnchor="26.0">
+                        <Button fx:id="editCallButton" layoutX="180.0" layoutY="14.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="124.0" text="Edit" AnchorPane.bottomAnchor="26.0">
                            <effect>
                               <InnerShadow blurType="ONE_PASS_BOX" height="10.0" radius="5.75" width="15.0" />
                            </effect>
                         </Button>
-                        <Button layoutX="45.0" layoutY="14.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="124.0" text="Delete">
+                        <Button fx:id="deleteStaff" layoutX="45.0" layoutY="14.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="124.0" text="Delete">
                            <effect>
                               <InnerShadow blurType="ONE_PASS_BOX" height="10.0" radius="5.75" width="15.0" />
                            </effect>
                         </Button>
                      </children>
                   </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="selectRolePane" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="359.0" layoutX="330.0" layoutY="82.0" stroke="BLACK" strokeType="INSIDE" width="388.0" AnchorPane.bottomAnchor="129.39999999999998" AnchorPane.leftAnchor="330.0" AnchorPane.topAnchor="80.80000000000001" />
+                  <Text layoutX="361.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Role to edit" />
+                  <ComboBox fx:id="existingRoleSelection" layoutX="443.0" layoutY="194.0" prefWidth="150.0" />
+                  <Button fx:id="continueButton" layoutX="549.0" layoutY="297.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="109.0" text="Continue" />
+                  <Button fx:id="cancelButton" layoutX="382.0" layoutY="297.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="109.0" text="Cancel" />
                </children>
             </AnchorPane>
          </children>
