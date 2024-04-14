@@ -55,6 +55,7 @@ public class LoginPage extends Application {
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/Lancasters-logo.png"))));
         stage.setTitle("Lancaster");
         if(LoginController.launch) {
+            stage.setMaximized(true);
             stage.setScene(scene);
             stage.show();
         }
