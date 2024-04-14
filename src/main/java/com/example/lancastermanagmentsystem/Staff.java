@@ -1,134 +1,112 @@
 package com.example.lancastermanagmentsystem;
 
+import java.util.ArrayList;
+
 public class Staff {
-    private final String id;
-    private String name;
-    private String surname;
-    private String role;
-    private String phoneNumber;
-    private String email;
-    private String gender;
-    private String dob;
-    private String address;
-    private String postcode;
-    private String county;
-    private float holiday;
-    private float remainingHoliday;
+    private final int ID;
+    private String Name;
+    private String Surname;
+    private String PhoneNumber;
+    private String Email;
+    private String DateOfBirth;
+    private int holiday;
+    private int remainingHoliday;
+    private ArrayList<String> roles;
+    private String password;
 
-
-    public Staff(String id, String name, String surname, String role, String phoneNumber, String email, String gender, String dob, String address, String postcode, String county, float holiday, float remainingHoliday) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.role = role;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.gender = gender;
-        this.dob = dob;
-        this.address = address;
-        this.postcode = postcode;
-        this.county = county;
+    public Staff(int ID, String name, String surname, String phoneNumber, String email,String dateOfBirth, ArrayList<String> roles, int holiday, int remainingHoliday) {
+        this.ID = ID;
+        this.Name = name;
+        this.Surname = surname;
+        this.PhoneNumber = phoneNumber;
+        this.Email = email;
+        this.DateOfBirth = dateOfBirth;
         this.holiday = holiday;
         this.remainingHoliday = remainingHoliday;
+        this.roles = roles;
     }
 
-    public String getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        Name = name;
     }
 
     public String getSurname() {
-        return surname;
+        return Surname;
     }
 
     public void setSurname(String surname) {
-        this.surname = surname;
+        Surname = surname;
     }
 
-    public String getRole() {
-        return role;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public String getPassword() {
+        return password;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getDateOfBirth() {
+        return DateOfBirth;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setDateOfBirth(String dateOfBirth) {
+        DateOfBirth = dateOfBirth;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
-    public String getCounty() {
-        return county;
-    }
-
-    public void setCounty(String county) {
-        this.county = county;
-    }
-
-    public float getHoliday() {
+    public int getHoliday() {
         return holiday;
     }
 
-    public void setHoliday(float holiday) {
+    public void setHoliday(int holiday) {
         this.holiday = holiday;
     }
 
-    public float getRemainingHoliday() {
+    public int getRemainingHoliday() {
         return remainingHoliday;
     }
 
-    public void setRemainingHoliday(float remainingHoliday) {
+    public void setRemainingHoliday(int remainingHoliday) {
         this.remainingHoliday = remainingHoliday;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        PhoneNumber = phoneNumber;
+    }
+
+    public ArrayList<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(ArrayList<String> roles) {
+        this.roles = roles;
+    }
+
+    public void addRole(String role) {
+        roles.add(role);
+    }
+
+    public void removeRole(String role) {
+        roles.remove(role);
     }
 }
