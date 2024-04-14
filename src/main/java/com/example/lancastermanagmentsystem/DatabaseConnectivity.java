@@ -6,8 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DatabaseConnectivity {
     private static Connection connection = null;
@@ -18,8 +22,8 @@ public class DatabaseConnectivity {
     private static String host = "smcse-stuproj00.city.ac.uk";
     private static int port = 3306;
     private static String dbName = "in2033t15";
-    private static String username = "in2033t15_d";
-    private static String password = "PH5HsLF6q2o";
+    private static String username = "in2033t15_a";
+    private static String password = "TYZVS1GIk-Y";
 
     public static boolean startConnection() {
         connection = null;
@@ -49,15 +53,19 @@ public class DatabaseConnectivity {
                 "FROM " +
                 "Staff s " +
                 "JOIN " +
-                "Role r ON s.role = r.name " +
+                "StaffRoles sr ON s.id = sr.staffId " +
                 "JOIN " +
-                "Login l ON s.id = l.staffId";
+                "Role r ON sr.roleId = r.id " +
+                "JOIN " +
+                "Login l ON s.id = l.staffId " +
+                "GROUP BY " +
+                "s.id, r.name";
         try {
             Statement statement = connection.createStatement();
             resultSet = statement.executeQuery(sqlQuery);
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 String name = resultSet.getString("FirstName") + " " + resultSet.getString("SecondName");
-                String[] user = {resultSet.getString("id")+ " " + name, resultSet.getString("Role")};
+                String[] user = {resultSet.getString("id") + " " + name, resultSet.getString("Role")};
                 userList.add(user);
             }
 
@@ -91,36 +99,283 @@ public class DatabaseConnectivity {
 
     public static ArrayList<Staff> retrieveStaff() {
         ArrayList<Staff> staffList = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM Staff";
+        String sqlQuery = "SELECT Staff.id, Staff.firstName, Staff.secondName, Staff.phone, " +
+                "Staff.email, Staff.dob, Staff.holiday, Staff.remainingHolidays, " +
+                "Role.name AS roleName " +
+                "FROM Staff " +
+                "JOIN StaffRoles ON Staff.id = StaffRoles.staffId " +
+                "JOIN Role ON StaffRoles.roleId = Role.id";
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            resultSet = statement.executeQuery(sqlQuery);
 
             // Iterate over the result set and print each row
             while (resultSet.next()) {
-                String id = resultSet.getString("id");
+                int id = Integer.parseInt(resultSet.getString("id"));
                 String name = resultSet.getString("firstName");
                 String surname = resultSet.getString("secondName");
-                String role = resultSet.getString("role");
                 String phoneNumber = resultSet.getString("phone");
                 String email = resultSet.getString("email");
-                String gender = resultSet.getString("gender");
                 String dob = resultSet.getString("dob");
-                String address = resultSet.getString("address");
-                String postcode = resultSet.getString("postcode");
-                String county = resultSet.getString("county");
-                float holiday = Float.parseFloat(resultSet.getString("holiday"));
-                float remark = Float.parseFloat(resultSet.getString("remainingHolidays"));
-
-                Staff staff = new Staff(id, name, surname, role, phoneNumber, email, gender, dob, address, postcode, county, holiday, remark);
-                staffList.add(staff);
+                int holiday = Integer.parseInt(resultSet.getString("holiday"));
+                int remark = Integer.parseInt(resultSet.getString("remainingHolidays"));
+                String role = resultSet.getString("roleName");
+                boolean containsId = false;
+                Staff temp = null;
+                for (Staff s : staffList) {
+                    if (s.getID() == id) {
+                        temp = s;
+                        containsId = true;
+                        break;
+                    }
+                }
+                if (containsId) {
+                    temp.addRole(role);
+                } else {
+                    ArrayList<String> roleList = new ArrayList<>();
+                    roleList.add(role);
+                    Staff staff = new Staff(id, name, surname, phoneNumber, email, dob, roleList, holiday, remark);
+                    staffList.add(staff);
+                }
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return staffList;
+    }
+
+    public static ArrayList<String> retrieveRoles() {
+        ArrayList<String> roles = new ArrayList<>();
+        String sqlQuery = "SELECT " +
+                "name " +
+                "FROM " +
+                "Role";
+        try {
+            Statement statement = connection.createStatement();
+            resultSet = statement.executeQuery(sqlQuery);
+            while (resultSet.next()) {
+                roles.add(resultSet.getString("name"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return roles;
+    }
+
+    public static void updateStaffTable(Staff staff) {
+        String sqlQuery = "UPDATE Staff SET " +
+                "firstName = ?, " +
+                "secondName = ?, " +
+                "phone = ?, " +
+                "email = ?, " +
+                "dob = ?, " +
+                "holiday = ?, " +
+                "remainingHolidays = ? " +
+                "WHERE id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sqlQuery);
+            statement.setString(1, staff.getName());
+            statement.setString(2, staff.getSurname());
+            statement.setString(3, staff.getPhoneNumber());
+            statement.setString(4, staff.getEmail());
+            statement.setDate(5, new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(staff.getDateOfBirth()).getTime()));
+            statement.setInt(6, staff.getHoliday());
+            statement.setInt(7, staff.getRemainingHoliday());
+            statement.setInt(8, staff.getID());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(staff.getPassword() != null);
+        if(staff.getPassword() != null){
+            String SqlupdatePassword = "UPDATE Login SET password = ? WHERE staffId = ?";
+            try {
+                PreparedStatement statement = connection.prepareStatement(SqlupdatePassword);
+                statement.setString(1, staff.getPassword());
+                statement.setInt(2, staff.getID());
+                statement.executeUpdate();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public static void addStaff(Staff staff){
+        String sqlQueryInsert = "INSERT INTO Staff (firstName, secondName, phone, email, dob, holiday, remainingHolidays)" +
+                "VALUES (?, ?, ?, ?, ?, 0, ?)";
+        String sqlAddRole = "INSERT INTO StaffRoles (staffId, roleId) " +
+                "VALUES (" +
+                "(SELECT id FROM Staff WHERE email = ?), " +
+                "(SELECT id FROM Role WHERE name = ?))";
+        try (PreparedStatement insertStatement = connection.prepareStatement(sqlQueryInsert)) {
+            insertStatement.setString(1, staff.getName());
+            insertStatement.setString(2, staff.getSurname());
+            insertStatement.setString(3, staff.getPhoneNumber());
+            insertStatement.setString(4, staff.getEmail());
+            insertStatement.setString(5, staff.getDateOfBirth());
+            insertStatement.setInt(6, staff.getRemainingHoliday());
+            insertStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to insert new staff", e);
+        }
+
+        try (PreparedStatement insertStatement = connection.prepareStatement(sqlAddRole)) {
+            insertStatement.setString(1, staff.getEmail());
+            insertStatement.setString(2, staff.getRoles().get(0));
+            insertStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to insert new staff", e);
+        }
+        if(staff.getPassword() != null && StaffController.admins.contains(staff.getRoles().get(0))){
+            String sqlAddLogin = "INSERT INTO Login (staffId, roleId, password) " +
+                    "VALUES (" +
+                    "(SELECT id FROM Staff WHERE email = ?), " +
+                    "(SELECT id FROM Role WHERE name = ?), " +
+                    "?" +
+                    ")";
+            try (PreparedStatement insertStatement = connection.prepareStatement(sqlAddLogin)) {
+                insertStatement.setString(1, staff.getEmail());
+                insertStatement.setString(2, staff.getRoles().get(0));
+                insertStatement.setString(3, staff.getPassword());
+                insertStatement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException("Failed to insert new staff", e);
+            }
+        }
+    }
+
+    public static int getAvailableStaff() {
+        int num = 0;
+        String sqlgetAvailableStaff = "SELECT COUNT(*) AS count_staff_with_zero_holiday " +
+                "FROM Staff " +
+                "WHERE holiday = 0";
+
+        try {
+            Statement statement = connection.createStatement();
+            resultSet = statement.executeQuery(sqlgetAvailableStaff);
+            if (resultSet.next()) {
+                num = resultSet.getInt("count_staff_with_zero_holiday");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to get available staff", e);
+        }
+        return num;
+    }
+
+    public static void deleteStaff(Staff staff){
+        try (Statement disableStatement = connection.createStatement()) {
+            disableStatement.executeUpdate("SET FOREIGN_KEY_CHECKS=0");
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to disable foreign key constraint", e);
+        }
+
+        String sqlDeleteStaffRole = "DELETE FROM StaffRoles WHERE staffId = ?";
+        String sqlDeleteStaffLogin = "DELETE FROM Login WHERE staffId = ?";
+        String sqlDeleteStaff = "DELETE FROM Staff WHERE id = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sqlDeleteStaffRole)) {
+            statement.setInt(1, staff.getID());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to delete new staff", e);
+        }
+        try (PreparedStatement statement = connection.prepareStatement(sqlDeleteStaffLogin)) {
+            statement.setInt(1, staff.getID());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to delete new staff", e);
+        }
+        try (PreparedStatement statement = connection.prepareStatement(sqlDeleteStaff)) {
+            statement.setInt(1, staff.getID());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to delete new staff", e);
+        }
+        try (Statement disableStatement = connection.createStatement()) {
+            disableStatement.executeUpdate("SET FOREIGN_KEY_CHECKS=1");
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to disable foreign key constraint", e);
+        }
+    }
+
+    public static void updateStaffRole(Staff staff, String initialRole, String newRole, String password, boolean removeLogin, boolean addLogin) {
+        String Password = password;
+
+        // Disable the foreign key constraint
+        try (Statement disableStatement = connection.createStatement()) {
+            disableStatement.executeUpdate("SET FOREIGN_KEY_CHECKS=0");
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to disable foreign key constraint", e);
+        }
+
+        // Delete the existing login record
+        if (removeLogin) {
+            String getPassword = "SELECT password FROM Login WHERE staffId = ? AND roleId = (SELECT id FROM Role WHERE name = ?)";
+            try (PreparedStatement statement = connection.prepareStatement(getPassword)) {
+                statement.setInt(1, staff.getID());
+                statement.setString(2, initialRole);
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    Password = resultSet.getString("password");
+                }
+            } catch (SQLException e) {
+                System.out.println("Error retrieving password: " + e.getMessage());
+            }
+
+            String sqlQueryDeleteLogin = "DELETE FROM Login WHERE staffId = ? AND roleId = (SELECT id FROM Role WHERE name = ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sqlQueryDeleteLogin)) {
+                statement.setInt(1, staff.getID());
+                statement.setString(2, initialRole);
+                System.out.println(sqlQueryDeleteLogin);
+                statement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        // Delete the existing staff role
+        String sqlQueryDelete = "DELETE FROM StaffRoles WHERE staffId = ? AND roleId = (SELECT id FROM Role WHERE name = ?)";
+        try (PreparedStatement deleteStatement = connection.prepareStatement(sqlQueryDelete)) {
+            deleteStatement.setInt(1, staff.getID());
+            deleteStatement.setString(2, initialRole);
+            System.out.println(sqlQueryDelete);
+            deleteStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to delete staff role", e);
+        }
+
+        // Re-enable the foreign key constraint
+        try (Statement enableStatement = connection.createStatement()) {
+            enableStatement.executeUpdate("SET FOREIGN_KEY_CHECKS=1");
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to re-enable foreign key constraint", e);
+        }
+
+        // Insert the new staff role
+        String sqlQueryInsert = "INSERT INTO StaffRoles (staffId, roleId) VALUES (?, (SELECT id FROM Role WHERE name = ?))";
+        try (PreparedStatement insertStatement = connection.prepareStatement(sqlQueryInsert)) {
+            insertStatement.setInt(1, staff.getID());
+            insertStatement.setString(2, newRole);
+            insertStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to insert new staff role", e);
+        }
+
+        if (addLogin) {
+            // Insert the new login record
+            String sqlQueryInsertLogin = "INSERT INTO Login (staffId, roleId, password) VALUES (?, (SELECT id FROM Role WHERE name = ?), ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sqlQueryInsertLogin)) {
+                statement.setInt(1, staff.getID());
+                statement.setString(2, newRole);
+                statement.setString(3, Password);
+                statement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException("Failed to insert new login record", e);
+            }
+        }
     }
 }
 
