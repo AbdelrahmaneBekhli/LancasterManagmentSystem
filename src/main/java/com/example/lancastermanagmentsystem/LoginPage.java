@@ -1,5 +1,8 @@
 package com.example.lancastermanagmentsystem;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -45,7 +48,7 @@ public class LoginPage extends Application {
 //        p.generatePdf();
 
         LoginPage.stage = stage;
-        Parent loginFxml = new FXMLLoader(getClass().getResource("login.fxml")).load();
+        Parent loginFxml = new FXMLLoader(getClass().getResource("Login.fxml")).load();
         Scene scene = new Scene(loginFxml, 1280, 720);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("styles.css")).toExternalForm());
 
@@ -55,6 +58,8 @@ public class LoginPage extends Application {
             stage.setScene(scene);
             stage.show();
         }
+
+
     }
 
     public static double get_width(){
@@ -76,29 +81,57 @@ public class LoginPage extends Application {
         stage.setScene(loginScene);
     }
 
-    public static void setMenusMenu() throws IOException {
-        Parent loginFxml = new FXMLLoader(LoginPage.class.getResource("MenusMenu.fxml")).load();
-        Scene loginScene = new Scene(loginFxml, get_width(), get_height());
-        loginScene.getStylesheets().add(Objects.requireNonNull(LoginPage.class.getResource("styles.css")).toExternalForm());
-        stage.setScene(loginScene);
+    public static void setDashboardPage() throws IOException {
+        Parent dashboardFxml = new FXMLLoader(LoginPage.class.getResource("Dashboard.fxml")).load();
+        Scene dashboardScene = new Scene(dashboardFxml, get_width(), get_height());
+        dashboardScene.getStylesheets().add(Objects.requireNonNull(LoginPage.class.getResource("styles.css")).toExternalForm());
+        stage.setScene(dashboardScene);
     }
 
-    public static void setAdminPage() throws IOException {
-        Parent adminFxml = new FXMLLoader(LoginPage.class.getResource("AdminMenu.fxml")).load();
-        Scene adminScene = new Scene(adminFxml, get_width(), get_height());
-        adminScene.getStylesheets().add(Objects.requireNonNull(LoginPage.class.getResource("styles.css")).toExternalForm());
-        stage.setScene(adminScene);
+    public static void setMenusMenu() throws IOException {
+        Parent menuFxml = new FXMLLoader(LoginPage.class.getResource("MenusMenu.fxml")).load();
+        Scene menuScene = new Scene(menuFxml, get_width(), get_height());
+        menuScene.getStylesheets().add(Objects.requireNonNull(LoginPage.class.getResource("styles.css")).toExternalForm());
+        stage.setScene(menuScene);
+    }
+
+    public static void setStatisticsPage() throws IOException {
+        Parent statisticsFxml = new FXMLLoader(LoginPage.class.getResource("statistics.fxml")).load();
+        Scene statisticsScene = new Scene(statisticsFxml, get_width(), get_height());
+        statisticsScene.getStylesheets().add(Objects.requireNonNull(LoginPage.class.getResource("styles.css")).toExternalForm());
+        stage.setScene(statisticsScene);
     }
 
     public static void setSupplierPage() throws IOException {
-        Parent adminFxml = new FXMLLoader(LoginPage.class.getResource("SupplierMenu.fxml")).load();
-        Scene adminScene = new Scene(adminFxml, get_width(), get_height());
-        adminScene.getStylesheets().add(Objects.requireNonNull(LoginPage.class.getResource("styles.css")).toExternalForm());
-        stage.setScene(adminScene);
+        Parent supplierFxml = new FXMLLoader(LoginPage.class.getResource("SupplierMenu.fxml")).load();
+        Scene supplierScene = new Scene(supplierFxml, get_width(), get_height());
+        supplierScene.getStylesheets().add(Objects.requireNonNull(LoginPage.class.getResource("styles.css")).toExternalForm());
+        stage.setScene(supplierScene);
+    }
+
+    public static void setStaffPage() throws IOException {
+        Parent supplierFxml = new FXMLLoader(LoginPage.class.getResource("Staff.fxml")).load();
+        Scene supplierScene = new Scene(supplierFxml, get_width(), get_height());
+        supplierScene.getStylesheets().add(Objects.requireNonNull(LoginPage.class.getResource("styles.css")).toExternalForm());
+        stage.setScene(supplierScene);
+    }
+
+    public static Text setTime(Text time){
+        LocalDateTime now = LocalDateTime.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        time.setText(now.format(formatter));
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(javafx.util.Duration.seconds(1), event -> LoginPage.updateDateTime(time))
+        );
+        timeline.setCycleCount(Animation.INDEFINITE); // Run indefinitely
+        timeline.play();
+        return time;
     }
 
     // Method to update the date and time
-    static Text updateDateTime(Text dateTime) {
+    private static Text updateDateTime(Text dateTime) {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         dateTime.setText(now.format(formatter));
