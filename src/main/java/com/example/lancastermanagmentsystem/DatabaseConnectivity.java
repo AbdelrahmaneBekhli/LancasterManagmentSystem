@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class DatabaseConnectivity {
@@ -91,6 +89,39 @@ public class DatabaseConnectivity {
         }
     }
 
+    public static ArrayList<Staff> retrieveStaff() {
+        ArrayList<Staff> staffList = new ArrayList<>();
+        String sqlQuery = "SELECT * FROM Staff";
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+
+            // Iterate over the result set and print each row
+            while (resultSet.next()) {
+                String id = resultSet.getString("id");
+                String name = resultSet.getString("firstName");
+                String surname = resultSet.getString("secondName");
+                String role = resultSet.getString("role");
+                String phoneNumber = resultSet.getString("phone");
+                String email = resultSet.getString("email");
+                String gender = resultSet.getString("gender");
+                String dob = resultSet.getString("dob");
+                String address = resultSet.getString("address");
+                String postcode = resultSet.getString("postcode");
+                String county = resultSet.getString("county");
+                float holiday = Float.parseFloat(resultSet.getString("holiday"));
+                float remark = Float.parseFloat(resultSet.getString("remainingHolidays"));
+
+                Staff staff = new Staff(id, name, surname, role, phoneNumber, email, gender, dob, address, postcode, county, holiday, remark);
+                staffList.add(staff);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return staffList;
+    }
 }
 
 
