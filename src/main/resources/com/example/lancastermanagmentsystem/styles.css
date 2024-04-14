@@ -17,7 +17,9 @@
     font-family: "Dishcek";
     src: url("fonts/Dishcek.otf");
 }
-
+.table-column{
+    -fx-alignment: CENTER;
+}
 
 .title{
     -fx-font-family: 'Avigea';
