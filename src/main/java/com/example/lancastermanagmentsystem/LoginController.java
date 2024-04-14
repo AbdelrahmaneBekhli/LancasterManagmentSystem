@@ -1,19 +1,13 @@
 package com.example.lancastermanagmentsystem;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,9 +29,6 @@ public class LoginController implements Initializable {
     PasswordField password;
 
     public static boolean launch;
-
-    private String[] users = {"Owner", "Manager", "Admin", "Sommelier"};;
-
     public static String user;
 
     @Override
@@ -67,11 +58,8 @@ public class LoginController implements Initializable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         dateTime.setText(now.format(formatter));
 
-        Timeline timeline = new Timeline(
-                new KeyFrame(javafx.util.Duration.seconds(1), event -> LoginPage.updateDateTime(dateTime))
-        );
-        timeline.setCycleCount(Animation.INDEFINITE); // Run indefinitely
-        timeline.play();
+        LoginPage.setTime(dateTime);
+
 
         // Set event handlers for each button
         one.setOnAction(e -> appendCharacter("1"));
@@ -119,7 +107,7 @@ public class LoginController implements Initializable {
             } else{
                 try {
                     user = user.split(" ")[1] + " " + user.split(" ")[2];
-                    LoginPage.setAdminPage();
+                    LoginPage.setDashboardPage();
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
