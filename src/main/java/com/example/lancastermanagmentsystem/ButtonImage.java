@@ -4,10 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -21,6 +18,7 @@ public class ButtonImage {
     private final Image hoverButtonImage;
 
     private final Label buttonLabel;
+    private Boolean selected = false;
 
 
     public ButtonImage(Button button, String label) {
@@ -33,11 +31,41 @@ public class ButtonImage {
         InputStream buttonImageLoc = getClass().getResourceAsStream("/com/example/lancastermanagmentsystem/images/button.png");
         InputStream hoverImageLoc = getClass().getResourceAsStream("/com/example/lancastermanagmentsystem/images/buttonHover.png");
 
+        assert buttonImageLoc != null;
+        assert hoverImageLoc != null;
         orgButtonImage = new Image(buttonImageLoc);
         hoverButtonImage = new Image(hoverImageLoc);
 
         butttonImage = new ImageView(orgButtonImage);
+    }
 
+    public ButtonImage(Button button, String label, boolean selected) {
+        this.button = button;
+        this.buttonLabel = new Label(label);
+        this.selected = selected;
+
+        Font customFont = Font.loadFont(getClass().getResourceAsStream("/com/example/lancastermanagmentsystem/fonts/Dishcek.otf"), 20);
+        buttonLabel.setFont(customFont);
+
+        InputStream buttonImageLoc = getClass().getResourceAsStream("/com/example/lancastermanagmentsystem/images/button.png");
+        InputStream hoverImageLoc = getClass().getResourceAsStream("/com/example/lancastermanagmentsystem/images/buttonHover.png");
+        InputStream selectedImageLoc = getClass().getResourceAsStream("/com/example/lancastermanagmentsystem/images/buttonClicked.png");
+
+
+        assert buttonImageLoc != null;
+        assert hoverImageLoc != null;
+        assert selectedImageLoc != null;
+
+        if(selected) {
+            orgButtonImage = new Image(selectedImageLoc);
+            hoverButtonImage = new Image(hoverImageLoc);
+        } else{
+            orgButtonImage = new Image(buttonImageLoc);
+            hoverButtonImage = new Image(hoverImageLoc);
+        }
+
+
+        butttonImage = new ImageView(orgButtonImage);
     }
 
     private void setBackground(){
@@ -47,8 +75,10 @@ public class ButtonImage {
     }
 
     private void setAnimation(){
-        button.setOnMouseEntered(event -> butttonImage.setImage(hoverButtonImage));
-        button.setOnMouseExited(event -> butttonImage.setImage(orgButtonImage));
+        if(!selected) {
+            button.setOnMouseEntered(event -> butttonImage.setImage(hoverButtonImage));
+            button.setOnMouseExited(event -> butttonImage.setImage(orgButtonImage));
+        }
     }
 
     public void setGraphics(){
