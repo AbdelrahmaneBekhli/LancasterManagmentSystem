@@ -9,10 +9,19 @@
 }
 
 @font-face {
+    font-family: "Avigea";
+    src: url("fonts/Avigea.ttf");
+}
+
+@font-face {
     font-family: "Dishcek";
     src: url("fonts/Dishcek.otf");
 }
 
+
+.title{
+    -fx-font-family: 'Avigea';
+}
 
 #logo{
     -fx-font-family: 'Origin Tech Demo';
