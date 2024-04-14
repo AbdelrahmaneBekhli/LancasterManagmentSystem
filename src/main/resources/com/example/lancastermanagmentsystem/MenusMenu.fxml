@@ -2,53 +2,36 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lancastermanagmentsystem.AdminMenusMenuController">
-   <top>
-      <GridPane prefHeight="65.0" prefWidth="1284.0" style="-fx-background-color: #2b3336; -fx-border-color: #a3a3a3; -fx-border-width: 5; -fx-border-style: dotted solid dashed;" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Text fill="#a3a3a3" strokeType="OUTSIDE" strokeWidth="0.0" text="User:">
-               <font>
-                  <Font name="Arial Bold" size="40.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin>
-            </Text>
-            <Text fill="#a3a3a3" strokeType="OUTSIDE" strokeWidth="0.0" text="Lancaster" GridPane.columnIndex="1" GridPane.halignment="CENTER">
-               <font>
-                  <Font name="Arial Bold" size="40.0" />
-               </font>
-            </Text>
-         </children>
-      </GridPane>
-   </top>
    <bottom>
-      <GridPane prefHeight="50.0" style="-fx-background-color: #a3a3a3;" BorderPane.alignment="CENTER">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <GridPane prefHeight="50.0" prefWidth="1278.0" style="-fx-background-color: #a3a3a3;" BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="179.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="901.0" minWidth="10.0" prefWidth="833.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="659.0" minWidth="10.0" prefWidth="252.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <Text id="dateTime" strokeType="OUTSIDE" strokeWidth="0.0" text="01/04/2024 20:53">
+            <Text fx:id="dateTime" strokeType="OUTSIDE" strokeWidth="0.0" text="13/04/2024 13:20">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
@@ -56,12 +39,7 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" GridPane.columnIndex="1" GridPane.halignment="CENTER">
-               <font>
-                  <Font name="Arial Bold" size="30.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Powered by" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Powered By" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
@@ -69,7 +47,7 @@
                   <Insets right="100.0" />
                </GridPane.margin>
             </Text>
-            <Text fill="#002061" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="logo" text="O" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+            <Text fill="#002061" strokeType="OUTSIDE" strokeWidth="0.0" text="O" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                <font>
                   <Font name="Origin Tech Demo" size="50.0" />
                </font>
@@ -77,54 +55,149 @@
                   <Insets right="50.0" />
                </GridPane.margin>
             </Text>
+            <Text fx:id="user" strokeType="OUTSIDE" strokeWidth="0.0" text="User" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <font>
+                  <Font name="Arial Bold" size="25.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="210.0" />
+               </GridPane.margin>
+            </Text>
          </children>
       </GridPane>
    </bottom>
-   <center>
-      <GridPane style="-fx-background-color: #2b3336;" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+   <left>
+      <AnchorPane prefHeight="578.0" prefWidth="223.0" style="-fx-background-color: #2b3336;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="backButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="251.0" text="Back" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <font>
-                  <Font name="Dishcek" size="24.0" />
-               </font>
-            </Button>
-            <Button fx:id="review" mnemonicParsing="false" prefHeight="100.0" prefWidth="251.0" text="Review Menu" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Dishcek" size="24.0" />
-               </font>
-            </Button>
-            <Button fx:id="cost" mnemonicParsing="false" prefHeight="100.0" prefWidth="251.0" text="Cost Menu" GridPane.columnIndex="2" GridPane.halignment="CENTER">
-               <font>
-                  <Font name="Dishcek" size="24.0" />
-               </font>
-            </Button>
+            <Button fx:id="menu" layoutX="18.0" layoutY="110.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="170.0" style=": #2b3336;" styleClass="bb" text="Menu" />
+            <Button fx:id="statistics" layoutX="18.0" layoutY="195.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="170.0" styleClass="bb" text="Statistics" />
+            <Button fx:id="supplier" layoutX="18.0" layoutY="280.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="170.0" styleClass="bb" text="Supplier" />
+            <Button fx:id="staff" layoutX="18.0" layoutY="365.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="170.0" styleClass="bb" text="Staff" />
+            <Button fx:id="logout" layoutX="18.0" layoutY="450.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="170.0" styleClass="bb" text="Logout" />
+            <Button fx:id="dashboard" layoutX="18.0" layoutY="25.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="170.0" style=": #2b3336;" styleClass="bb" text="Dashboard" />
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <GridPane style="-fx-background-color: c9c9c9;" BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <AnchorPane prefHeight="570.0" prefWidth="716.0">
+               <children>
+                  <TableView layoutX="13.0" layoutY="32.0" prefHeight="432.0" prefWidth="616.0" AnchorPane.bottomAnchor="106.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="428.0" AnchorPane.topAnchor="32.0">
+                    <columns>
+                      <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="123.0" text="ID" />
+                      <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="123.0" text="Name" />
+                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="123.0" text="Description" />
+                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="123.0" text="Type" />
+                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="123.0" text="Price" />
+                    </columns>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                  </TableView>
+                  <DatePicker layoutX="14.0" layoutY="480.0" prefHeight="49.0" prefWidth="242.0" promptText="Pick Menu date" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="14.0">
+                     <effect>
+                        <InnerShadow blurType="ONE_PASS_BOX" height="10.0" radius="7.25" />
+                     </effect>
+                  </DatePicker>
+                  <AnchorPane layoutX="654.0" layoutY="32.0" prefHeight="433.0" prefWidth="389.0" style="-fx-border-color: #334db3;" AnchorPane.bottomAnchor="105.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="32.0">
+                     <children>
+                        <Text layoutX="27.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
+                           <font>
+                              <Font name="Dishcek" size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField editable="false" layoutX="62.0" layoutY="35.0" prefHeight="25.0" prefWidth="312.0" />
+                        <Separator layoutX="27.0" layoutY="83.0" prefHeight="0.0" prefWidth="346.0" />
+                        <Text layoutX="27.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dish name">
+                           <font>
+                              <Font name="Dishcek" size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField layoutX="26.0" layoutY="139.0" prefHeight="25.0" prefWidth="346.0" />
+                        <Text layoutX="27.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Decription">
+                           <font>
+                              <Font name="Dishcek" size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField layoutX="26.0" layoutY="203.0" prefHeight="25.0" prefWidth="346.0" />
+                        <Text layoutX="27.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+                           <font>
+                              <Font name="Dishcek" size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField layoutX="26.0" layoutY="270.0" prefHeight="25.0" prefWidth="346.0" />
+                        <Text layoutX="27.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price">
+                           <font>
+                              <Font name="Dishcek" size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField layoutX="26.0" layoutY="344.0" prefHeight="25.0" prefWidth="345.0" />
+                        <Button layoutX="228.0" layoutY="378.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="124.0" text="Save Changes" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="228.0" AnchorPane.rightAnchor="40.0" />
+                        <Button layoutX="57.0" layoutY="378.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="124.0" text="Delete Dish" />
+                     </children>
+                     <effect>
+                        <InnerShadow blurType="ONE_PASS_BOX" height="15.0" radius="7.0" width="15.0">
+                           <color>
+                              <Color red="0.20000000298023224" green="0.3019607961177826" blue="0.7019608020782471" />
+                           </color>
+                        </InnerShadow>
+                     </effect>
+                  </AnchorPane>
+                  <Button layoutX="505.0" layoutY="480.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="124.0" text="Send Menu" AnchorPane.bottomAnchor="41.0" AnchorPane.rightAnchor="428.0">
+                     <effect>
+                        <InnerShadow blurType="ONE_PASS_BOX" height="10.0" radius="5.75" width="15.0" />
+                     </effect>
+                  </Button>
+               </children>
+            </AnchorPane>
          </children>
       </GridPane>
    </center>
-   <right>
-      <GridPane BorderPane.alignment="CENTER">
+   <top>
+      <GridPane prefHeight="100.0" style="-fx-background-color: #a3a3a3;" BorderPane.alignment="CENTER">
         <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="255.0" minWidth="255.0" prefWidth="255.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="255.0" minWidth="255.0" prefWidth="255.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" text="Button" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Menu" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <font>
+                  <Font name="Dishcek" size="38.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="150.0" />
+               </GridPane.margin>
+            </Text>
+            <GridPane maxHeight="100.0" maxWidth="223.0" prefHeight="100.0" prefWidth="223.0" style="-fx-background-color: #2b3336;">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <ImageView fitHeight="96.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                     <image>
+                        <Image url="@images/LancastersFullLogo.jpg" />
+                     </image>
+                     <GridPane.margin>
+                        <Insets top="3.0" />
+                     </GridPane.margin>
+                  </ImageView>
+               </children>
+            </GridPane>
          </children>
       </GridPane>
-   </right>
+   </top>
 </BorderPane>
