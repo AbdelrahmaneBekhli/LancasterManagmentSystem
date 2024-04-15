@@ -1,5 +1,7 @@
 package com.example.lancastermanagmentsystem;
 
+import javafx.collections.ObservableList;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,11 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 public class DatabaseConnectivity {
     private static Connection connection = null;
@@ -146,6 +148,124 @@ public class DatabaseConnectivity {
         return staffList;
     }
 
+    public static ArrayList<Ingredient> retrieveSupplierStock() {
+        ArrayList<Ingredient> ingredientsList = new ArrayList<>();
+        String query  = "SELECT " +
+                "Ingredients.id, " +
+                "Ingredients.name, " +
+                "Ingredients.price, " +
+                "Ingredients.vegan, " +
+                "Ingredients.allergens, " +
+                "Ingredients.type, " +
+                "Supplier.quantity " +
+                "FROM Supplier " +
+                "JOIN Ingredients " +
+                "ON Supplier.ingredientID = Ingredients.id"
+                ;
+
+        try {
+            Statement statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                float price = resultSet.getFloat("price");
+                boolean vegan = resultSet.getBoolean("vegan");
+                boolean allergens = resultSet.getBoolean("allergens");
+                String type = resultSet.getString("type");
+                int quantity = resultSet.getInt("quantity");
+
+                Ingredient ingredient = new Ingredient(id, name, quantity, price,vegan, allergens, type);
+                ingredientsList.add(ingredient);
+            }
+        } catch(Exception e){
+            System.out.println(e);
+        }
+        return ingredientsList;
+    }
+
+    public static ArrayList<Order> retrieveOrder() {
+        ArrayList<Order> orderList = new ArrayList<>();
+        String query = "SELECT " +
+                "oi.id AS orderId, " +
+                "i.name AS ingredient_name, " +
+                "oi.amount AS quantity, " +
+                "(i.price * oi.amount) AS total_price, " +
+                "i.type, " +
+                "oi.delivered " +
+                "FROM " +
+                "OrderedItem oi " +
+                "JOIN " +
+                "Ingredients i ON oi.ingredientId = i.id " +
+                "JOIN " +
+                "Orders o ON oi.orderId = o.id ";
+
+        try {
+            Statement statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+
+            // Iterate over the result set and print each row
+            while (resultSet.next()) {
+                int id = resultSet.getInt("orderId");
+                String name = resultSet.getString("ingredient_name");
+                int quantity = resultSet.getInt("quantity");
+                float phoneNumber = resultSet.getFloat("total_price");
+                String type = resultSet.getString("type");
+                boolean delivered = resultSet.getBoolean("delivered");
+
+                Order order = new Order(id, name, quantity, phoneNumber, type, delivered);
+                orderList.add(order);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return orderList;
+    }
+
+    public static ArrayList<Order> searchOrder(String date) {
+        ArrayList<Order> orderList = new ArrayList<>();
+        String query = "SELECT " +
+                "oi.id AS orderId, " +
+                "i.name AS ingredient_name, " +
+                "oi.amount AS quantity, " +
+                "(i.price * oi.amount) AS total_price, " +
+                "i.type, " +
+                "oi.delivered " +
+                "FROM " +
+                "OrderedItem oi " +
+                "JOIN " +
+                "Ingredients i ON oi.ingredientId = i.id " +
+                "JOIN " +
+                "Orders o ON oi.orderId = o.id " +
+                "WHERE o.orderDate = + ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, date);
+            resultSet = statement.executeQuery();
+
+            // Iterate over the result set and print each row
+            while (resultSet.next()) {
+                int id = resultSet.getInt("orderId");
+                String name = resultSet.getString("ingredient_name");
+                int quantity = resultSet.getInt("quantity");
+                float phoneNumber = resultSet.getFloat("total_price");
+                String type = resultSet.getString("type");
+                boolean delivered = resultSet.getBoolean("delivered");
+
+                Order order = new Order(id, name, quantity, phoneNumber, type, delivered);
+                orderList.add(order);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return orderList;
+    }
+
+
+
     public static ArrayList<String> retrieveRoles() {
         ArrayList<String> roles = new ArrayList<>();
         String sqlQuery = "SELECT " +
@@ -245,6 +365,67 @@ public class DatabaseConnectivity {
                 throw new RuntimeException("Failed to insert new staff", e);
             }
         }
+    }
+
+    public static void insertOrder(ObservableList<Ingredient> list) {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String todayDate = now.format(formatter);
+        int orderId = 0;
+        String sqlOrderInsert = "INSERT INTO Orders(orderDate, deliveryDate, placed, price) " +
+                "VALUES (?, ?, 1, ?)";
+
+        try (PreparedStatement insertStatement = connection.prepareStatement(sqlOrderInsert, Statement.RETURN_GENERATED_KEYS)) {
+            LocalDateTime tomorrow = now.plusDays(1);
+            String tomorrowDate = tomorrow.format(formatter);
+
+            double total = 0;
+            for (Ingredient i : list) {
+                total = total + (i.getPrice() * i.getOrdered());
+            }
+
+            insertStatement.setString(1, todayDate);
+            insertStatement.setString(2, tomorrowDate);
+            insertStatement.setDouble(3, total);
+
+            insertStatement.executeUpdate();
+
+            try{
+                String sqlInsertIngredients = "SELECT id FROM Orders WHERE orderDate = ?";
+                try {
+                    PreparedStatement ingredientStatement = connection.prepareStatement(sqlInsertIngredients);
+                    ingredientStatement.setString(1, todayDate);
+                    ResultSet resultSet = ingredientStatement.executeQuery();
+                    if(resultSet.next()){
+                        orderId = resultSet.getInt("id");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                String sqlInsertIngredients = "INSERT INTO OrderedItem(orderId, ingredientId, amount, delivered) " +
+                        "VALUES (?, ?, ?, 0)";
+                try (PreparedStatement ingredientStatement = connection.prepareStatement(sqlInsertIngredients)) {
+                    for (Ingredient ingredient : list) {
+                        ingredientStatement.setInt(1, orderId);
+                        ingredientStatement.setInt(2, ingredient.getID());
+                        ingredientStatement.setInt(3, ingredient.getOrdered());
+                        ingredientStatement.executeUpdate();
+                    }
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static int getAvailableStaff() {

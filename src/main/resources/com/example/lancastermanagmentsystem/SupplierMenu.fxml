@@ -21,7 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lancastermanagmentsystem.AdminMenusMenuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lancastermanagmentsystem.SupplierMenuController">
    <bottom>
       <GridPane prefHeight="50.0" prefWidth="1278.0" style="-fx-background-color: #a3a3a3;" BorderPane.alignment="CENTER">
          <columnConstraints>
@@ -89,21 +89,21 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <AnchorPane prefHeight="570.0" prefWidth="716.0">
+            <AnchorPane fx:id="searchOrderPane" prefHeight="570.0" prefWidth="716.0">
                <children>
-                  <TableView layoutX="13.0" layoutY="32.0" prefHeight="432.0" prefWidth="616.0" AnchorPane.bottomAnchor="106.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="428.0" AnchorPane.topAnchor="32.0">
+                  <TableView fx:id="orderTable" layoutX="13.0" layoutY="32.0" onMouseClicked="#selected" prefHeight="432.0" prefWidth="616.0" AnchorPane.bottomAnchor="106.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="428.0" AnchorPane.topAnchor="32.0">
                      <columns>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="123.0" text="Ingredient" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="123.0" text="Quantity" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="123.0" text="Price" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="123.0" text="Type" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="123.0" text="Delivered" />
+                        <TableColumn fx:id="ingredient_name" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="123.0" text="Ingredient" />
+                        <TableColumn fx:id="quantity" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="123.0" text="Quantity" />
+                        <TableColumn fx:id="price" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="123.0" text="Price" />
+                        <TableColumn fx:id="type" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="123.0" text="Type" />
+                        <TableColumn fx:id="delivered" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="123.0" text="Delivered" />
                      </columns>
                      <effect>
                         <InnerShadow />
                      </effect>
                   </TableView>
-                  <DatePicker layoutX="14.0" layoutY="480.0" prefHeight="49.0" prefWidth="242.0" promptText="Pick Menu date" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="14.0">
+                  <DatePicker fx:id="datePicker" layoutX="14.0" layoutY="480.0" prefHeight="49.0" prefWidth="242.0" promptText="Pick Menu date" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="14.0">
                      <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="10.0" radius="7.25" />
                      </effect>
@@ -115,35 +115,35 @@
                               <Font name="Dishcek" size="20.0" />
                            </font>
                         </Text>
-                        <TextField editable="false" layoutX="62.0" layoutY="35.0" prefHeight="25.0" prefWidth="312.0" />
+                        <TextField fx:id="id" editable="false" layoutX="62.0" layoutY="35.0" prefHeight="25.0" prefWidth="312.0" />
                         <Separator layoutX="26.0" layoutY="75.0" prefHeight="0.0" prefWidth="346.0" />
                         <Text layoutX="27.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient">
                            <font>
                               <Font name="Dishcek" size="20.0" />
                            </font>
                         </Text>
-                        <TextField layoutX="26.0" layoutY="131.0" prefHeight="25.0" prefWidth="346.0" />
+                        <TextField fx:id="ingredientField" layoutX="26.0" layoutY="131.0" prefHeight="25.0" prefWidth="346.0" />
                         <Text layoutX="27.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity">
                            <font>
                               <Font name="Dishcek" size="20.0" />
                            </font>
                         </Text>
-                        <TextField layoutX="26.0" layoutY="194.0" prefHeight="25.0" prefWidth="346.0" />
                         <Text layoutX="27.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price">
                            <font>
                               <Font name="Dishcek" size="20.0" />
                            </font>
                         </Text>
-                        <TextField layoutX="26.0" layoutY="255.0" prefHeight="25.0" prefWidth="346.0" />
+                        <TextField fx:id="priceField" layoutX="26.0" layoutY="255.0" prefHeight="25.0" prefWidth="346.0" />
                         <Text layoutX="27.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
                            <font>
                               <Font name="Dishcek" size="20.0" />
                            </font>
                         </Text>
-                        <TextField layoutX="26.0" layoutY="317.0" prefHeight="25.0" prefWidth="345.0" />
+                        <TextField fx:id="typeField" layoutX="26.0" layoutY="317.0" prefHeight="25.0" prefWidth="345.0" />
                         <Button layoutX="265.0" layoutY="376.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="111.0" text="Toggle Delivered" />
                         <Button layoutX="14.0" layoutY="376.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="116.0" text="Delete Ingredient" />
                         <Button layoutX="145.0" layoutY="376.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="109.0" text="Save Changes" />
+                        <TextField fx:id="quantityField" layoutX="25.0" layoutY="190.0" prefHeight="25.0" prefWidth="346.0" />
                      </children>
                      <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="15.0" radius="7.0" width="15.0">
@@ -158,23 +158,66 @@
                         <InnerShadow blurType="ONE_PASS_BOX" height="10.0" radius="5.75" width="15.0" />
                      </effect>
                   </Button>
-                  <Button fx:id="addIngredient" layoutX="955.0" layoutY="485.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="119.0" text="Add Ingredient" AnchorPane.bottomAnchor="46.0" AnchorPane.rightAnchor="14.0" />
-                  <AnchorPane fx:id="addIngredientPane" layoutX="654.0" layoutY="42.0" prefHeight="282.0" prefWidth="374.0" style="-fx-border-color: #334db3;" visible="false" AnchorPane.bottomAnchor="106.0" AnchorPane.rightAnchor="14.0">
+                  <Button fx:id="createOrder" layoutX="955.0" layoutY="485.0" mnemonicParsing="false" onAction="#setNewOrder" prefHeight="39.0" prefWidth="119.0" text="Create Order" AnchorPane.bottomAnchor="46.0" AnchorPane.rightAnchor="14.0" />
+                  <Button fx:id="searchButton1" layoutX="290.0" layoutY="483.0" mnemonicParsing="false" onAction="#searchMenu" prefHeight="46.0" prefWidth="109.0" text="Search" AnchorPane.bottomAnchor="40.200000000000024" AnchorPane.leftAnchor="290.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="newOrderPane" layoutX="10.0" layoutY="10.0" prefHeight="570.0" prefWidth="716.0" visible="false">
+               <children>
+                  <TableView fx:id="newOrderTable" layoutX="13.0" layoutY="32.0" onMouseClicked="#selected" prefHeight="432.0" prefWidth="616.0" AnchorPane.bottomAnchor="106.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="428.0" AnchorPane.topAnchor="32.0">
+                     <columns>
+                        <TableColumn fx:id="newTableIngredient" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="103.0" text="Ingredient" />
+                        <TableColumn fx:id="newTableQuantity" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="103.0" text="Quantity" />
+                        <TableColumn fx:id="newTableSinglePrice" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="103.0" text="single price" />
+                        <TableColumn fx:id="newTableVegan" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="103.0" text="Vegan" />
+                        <TableColumn fx:id="newTableAllergens" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="103.0" text="Allergens" />
+                        <TableColumn fx:id="newTableTotalPrice" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="103.0" text="total price" />
+                     </columns>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                  </TableView>
+                  <DatePicker fx:id="datePicker1" layoutX="14.0" layoutY="480.0" prefHeight="49.0" prefWidth="242.0" promptText="Pick Menu date" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="14.0">
+                     <effect>
+                        <InnerShadow blurType="ONE_PASS_BOX" height="10.0" radius="7.25" />
+                     </effect>
+                  </DatePicker>
+                  <AnchorPane layoutX="654.0" layoutY="32.0" prefHeight="450.0" prefWidth="390.0" style="-fx-border-color: #334db3;" AnchorPane.bottomAnchor="88.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="32.0">
                      <children>
-                        <Text layoutX="21.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient">
+                        <Text layoutX="27.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
                            <font>
                               <Font name="Dishcek" size="20.0" />
                            </font>
                         </Text>
-                        <Button fx:id="addIngredientCancel" layoutX="67.0" layoutY="202.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="116.0" text="Cancel" />
-                        <Button fx:id="submitAddIngredient" layoutX="221.0" layoutY="202.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="109.0" text="Submit" />
-                        <Text layoutX="22.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity">
+                        <TextField fx:id="newID" editable="false" layoutX="62.0" layoutY="35.0" prefHeight="25.0" prefWidth="312.0" />
+                        <Separator layoutX="26.0" layoutY="75.0" prefHeight="0.0" prefWidth="346.0" />
+                        <Text layoutX="27.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient">
                            <font>
                               <Font name="Dishcek" size="20.0" />
                            </font>
                         </Text>
-                        <Spinner fx:id="quantitySpinner" layoutX="20.0" layoutY="129.0" prefHeight="48.0" prefWidth="345.0" />
-                        <ComboBox fx:id="ingredientComboBox" layoutX="18.0" layoutY="45.0" prefHeight="41.0" prefWidth="349.0" />
+                        <ComboBox fx:id="newIngredients" layoutX="28.0" layoutY="126.0" onAction="#loadMax" prefHeight="26.0" prefWidth="342.0" />
+                        <Text layoutX="27.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity">
+                           <font>
+                              <Font name="Dishcek" size="20.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="27.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price">
+                           <font>
+                              <Font name="Dishcek" size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="newPrice" editable="false" layoutX="26.0" layoutY="255.0" prefHeight="25.0" prefWidth="346.0" />
+                        <Text layoutX="27.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+                           <font>
+                              <Font name="Dishcek" size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="newType" editable="false" layoutX="26.0" layoutY="317.0" prefHeight="25.0" prefWidth="345.0" />
+                        <Button fx:id="deleteNew" layoutX="50.0" layoutY="352.0" mnemonicParsing="false" onAction="#removeNewIngredient" prefHeight="49.0" prefWidth="116.0" text="Delete Ingredient" />
+                        <Button fx:id="saveNew" layoutX="237.0" layoutY="352.0" mnemonicParsing="false" onAction="#updateNewTable" prefHeight="49.0" prefWidth="109.0" text="add Ingredient" />
+                        <Spinner fx:id="newQuantity" layoutX="25.0" layoutY="190.0" prefHeight="26.0" prefWidth="347.0" />
+                        <Button fx:id="submitNewOrder" layoutX="146.0" layoutY="412.0" mnemonicParsing="false" onAction="#storeOrder" prefHeight="57.0" prefWidth="108.0" text="Submit" />
                      </children>
                      <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="15.0" radius="7.0" width="15.0">
@@ -184,6 +227,38 @@
                         </InnerShadow>
                      </effect>
                   </AnchorPane>
+                  <Button layoutX="505.0" layoutY="480.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="124.0" text="Place Order" AnchorPane.bottomAnchor="41.0" AnchorPane.rightAnchor="428.0">
+                     <effect>
+                        <InnerShadow blurType="ONE_PASS_BOX" height="10.0" radius="5.75" width="15.0" />
+                     </effect>
+                  </Button>
+                  <Button fx:id="backButton" layoutX="896.0" layoutY="492.0" mnemonicParsing="false" onAction="#backToSearch" prefHeight="39.0" prefWidth="119.0" text="back" AnchorPane.bottomAnchor="38.39999999999998" AnchorPane.rightAnchor="40.799999999999955" />
+                  <AnchorPane fx:id="addIngredientPane1" layoutX="654.0" layoutY="42.0" prefHeight="282.0" prefWidth="374.0" style="-fx-border-color: #334db3;" visible="false" AnchorPane.bottomAnchor="106.0" AnchorPane.rightAnchor="14.0">
+                     <children>
+                        <Text layoutX="21.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient">
+                           <font>
+                              <Font name="Dishcek" size="20.0" />
+                           </font>
+                        </Text>
+                        <Button fx:id="addIngredientCancel1" layoutX="67.0" layoutY="202.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="116.0" text="Cancel" />
+                        <Button fx:id="submitAddIngredient1" layoutX="221.0" layoutY="202.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="109.0" text="Submit" />
+                        <Text layoutX="22.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity">
+                           <font>
+                              <Font name="Dishcek" size="20.0" />
+                           </font>
+                        </Text>
+                        <Spinner fx:id="quantitySpinner1" layoutX="20.0" layoutY="129.0" prefHeight="48.0" prefWidth="345.0" />
+                        <ComboBox fx:id="ingredientComboBox1" layoutX="18.0" layoutY="45.0" prefHeight="41.0" prefWidth="349.0" />
+                     </children>
+                     <effect>
+                        <InnerShadow blurType="ONE_PASS_BOX" height="15.0" radius="7.0" width="15.0">
+                           <color>
+                              <Color red="0.20000000298023224" green="0.3019607961177826" blue="0.7019608020782471" />
+                           </color>
+                        </InnerShadow>
+                     </effect>
+                  </AnchorPane>
+                  <Button fx:id="addIngredient11" layoutX="696.0" layoutY="493.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="119.0" text="Generate Order" AnchorPane.bottomAnchor="37.39999999999998" AnchorPane.rightAnchor="240.79999999999995" />
                </children>
             </AnchorPane>
          </children>
