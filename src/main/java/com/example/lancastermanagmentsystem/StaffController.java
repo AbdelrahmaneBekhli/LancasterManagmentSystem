@@ -144,7 +144,6 @@ public class StaffController implements Initializable {
 
 
 
-
         ButtonImage dashboardButtonImage = new ButtonImage(dashboard, "Dashboard");
         ButtonImage menuButtonImage = new ButtonImage(menu, "Menu");
         ButtonImage graphButtonImage = new ButtonImage(statistics, "statistics");

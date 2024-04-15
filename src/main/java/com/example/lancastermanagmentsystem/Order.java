@@ -1,7 +1,7 @@
 package com.example.lancastermanagmentsystem;
 
 public class Order {
-    private int orderID;
+    private int ID;
     private String ingredient_name;
     private int quantity;
     private float total_price;
@@ -9,7 +9,7 @@ public class Order {
     private boolean delivered;
 
     public Order(int orderID, String ingredient_name, int quantity, float total_price, String type, boolean delivered) {
-        this.orderID = orderID;
+        this.ID = orderID;
         this.ingredient_name = ingredient_name;
         this.quantity = quantity;
         this.total_price = total_price;
@@ -17,12 +17,12 @@ public class Order {
         this.delivered = delivered;
     }
 
-    public int getOrderID() {
-        return orderID;
+    public int getID() {
+        return ID;
     }
 
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
+    public void setID(int orderID) {
+        this.ID = orderID;
     }
 
     public String getIngredient_name() {
