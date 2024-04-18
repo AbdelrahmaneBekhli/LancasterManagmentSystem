@@ -11,8 +11,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 public class DatabaseConnectivity {
@@ -150,7 +149,7 @@ public class DatabaseConnectivity {
 
     public static ArrayList<Ingredient> retrieveSupplierStock() {
         ArrayList<Ingredient> ingredientsList = new ArrayList<>();
-        String query  = "SELECT " +
+        String query = "SELECT " +
                 "Ingredients.id, " +
                 "Ingredients.name, " +
                 "Ingredients.price, " +
@@ -160,25 +159,24 @@ public class DatabaseConnectivity {
                 "Supplier.quantity " +
                 "FROM Supplier " +
                 "JOIN Ingredients " +
-                "ON Supplier.ingredientID = Ingredients.id"
-                ;
+                "ON Supplier.ingredientID = Ingredients.id";
 
         try {
             Statement statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 float price = resultSet.getFloat("price");
                 boolean vegan = resultSet.getBoolean("vegan");
-                boolean allergens = resultSet.getBoolean("allergens");
+                String allergens = resultSet.getString("allergens");
                 String type = resultSet.getString("type");
                 int quantity = resultSet.getInt("quantity");
 
-                Ingredient ingredient = new Ingredient(id, name, quantity, price,vegan, allergens, type);
+                Ingredient ingredient = new Ingredient(id, name, quantity, price, vegan, allergens, type);
                 ingredientsList.add(ingredient);
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
         return ingredientsList;
@@ -265,7 +263,6 @@ public class DatabaseConnectivity {
     }
 
 
-
     public static ArrayList<String> retrieveRoles() {
         ArrayList<String> roles = new ArrayList<>();
         String sqlQuery = "SELECT " +
@@ -309,8 +306,7 @@ public class DatabaseConnectivity {
             throw new RuntimeException(e);
         }
 
-        System.out.println(staff.getPassword() != null);
-        if(staff.getPassword() != null){
+        if (staff.getPassword() != null) {
             String SqlupdatePassword = "UPDATE Login SET password = ? WHERE staffId = ?";
             try {
                 PreparedStatement statement = connection.prepareStatement(SqlupdatePassword);
@@ -323,7 +319,7 @@ public class DatabaseConnectivity {
         }
     }
 
-    public static void addStaff(Staff staff){
+    public static void addStaff(Staff staff) {
         String sqlQueryInsert = "INSERT INTO Staff (firstName, secondName, phone, email, dob, holiday, remainingHolidays)" +
                 "VALUES (?, ?, ?, ?, ?, 0, ?)";
         String sqlAddRole = "INSERT INTO StaffRoles (staffId, roleId) " +
@@ -349,7 +345,7 @@ public class DatabaseConnectivity {
         } catch (SQLException e) {
             throw new RuntimeException("Failed to insert new staff", e);
         }
-        if(staff.getPassword() != null && StaffController.admins.contains(staff.getRoles().get(0))){
+        if (staff.getPassword() != null && StaffController.admins.contains(staff.getRoles().get(0))) {
             String sqlAddLogin = "INSERT INTO Login (staffId, roleId, password) " +
                     "VALUES (" +
                     "(SELECT id FROM Staff WHERE email = ?), " +
@@ -390,13 +386,13 @@ public class DatabaseConnectivity {
 
             insertStatement.executeUpdate();
 
-            try{
+            try {
                 String sqlInsertIngredients = "SELECT id FROM Orders WHERE orderDate = ?";
                 try {
                     PreparedStatement ingredientStatement = connection.prepareStatement(sqlInsertIngredients);
                     ingredientStatement.setString(1, todayDate);
                     ResultSet resultSet = ingredientStatement.executeQuery();
-                    if(resultSet.next()){
+                    if (resultSet.next()) {
                         orderId = resultSet.getInt("id");
                     }
                 } catch (SQLException e) {
@@ -415,7 +411,7 @@ public class DatabaseConnectivity {
                         ingredientStatement.setInt(3, ingredient.getOrdered());
                         ingredientStatement.executeUpdate();
                     }
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -446,7 +442,7 @@ public class DatabaseConnectivity {
         return num;
     }
 
-    public static void deleteStaff(Staff staff){
+    public static void deleteStaff(Staff staff) {
         try (Statement disableStatement = connection.createStatement()) {
             disableStatement.executeUpdate("SET FOREIGN_KEY_CHECKS=0");
         } catch (SQLException e) {
@@ -510,7 +506,6 @@ public class DatabaseConnectivity {
             try (PreparedStatement statement = connection.prepareStatement(sqlQueryDeleteLogin)) {
                 statement.setInt(1, staff.getID());
                 statement.setString(2, initialRole);
-                System.out.println(sqlQueryDeleteLogin);
                 statement.executeUpdate();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -556,6 +551,198 @@ public class DatabaseConnectivity {
             } catch (SQLException e) {
                 throw new RuntimeException("Failed to insert new login record", e);
             }
+        }
+    }
+
+    public static ArrayList<ArrayList<Integer>> bookingsStats() {
+        String sqlBookingsStat = "SELECT walkIns, onlineBookings, phoneBookings FROM Sales";
+        ArrayList<ArrayList<Integer>> bookingsStats = new ArrayList<>();
+        try (Statement earningsStatement = connection.createStatement()) {
+            earningsStatement.execute(sqlBookingsStat);
+            ResultSet resultSet = earningsStatement.getResultSet();
+            while (resultSet.next()) {
+                ArrayList<Integer> bookings = new ArrayList<>();
+                bookings.add(resultSet.getInt("walkIns"));
+                bookings.add(resultSet.getInt("onlineBookings"));
+                bookings.add(resultSet.getInt("phoneBookings"));
+                bookingsStats.add(bookings);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bookingsStats;
+    }
+
+    ;
+
+    public static Map<String, Integer> getEarnings(String startDate, String endDate) {
+        Map<String, Integer> earnings = new LinkedHashMap<>();
+
+        String sqlEarningsStat = "SELECT date, totalEarning FROM Sales WHERE date BETWEEN ? AND ?";
+        try (PreparedStatement earningsStatement = connection.prepareStatement(sqlEarningsStat)) {
+
+            earningsStatement.setString(1, startDate);
+            earningsStatement.setString(2, endDate);
+
+            try (ResultSet resultSet = earningsStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String dateStr = resultSet.getString("date");
+                    System.out.println(earningsStatement);
+                    int quantity = resultSet.getInt("totalEarning");
+                    earnings.put(dateStr, quantity);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return earnings;
+    }
+
+    public static Map<String, Integer> getDishSold(String startDate, String endDate) {
+        Map<String, Integer> earnings = new LinkedHashMap<>();
+
+
+        String sqlEarningsStat = "SELECT date, dishQuantity FROM Sales WHERE date BETWEEN ? AND ?";
+        try (PreparedStatement earningsStatement = connection.prepareStatement(sqlEarningsStat)) {
+
+            earningsStatement.setString(1, startDate);
+            earningsStatement.setString(2, endDate);
+
+            try (ResultSet resultSet = earningsStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String dateStr = resultSet.getString("date");
+                    System.out.println(earningsStatement);
+                    int quantity = resultSet.getInt("dishQuantity");
+                    earnings.put(dateStr, quantity);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return earnings;
+    }
+
+    public static Map<String, Integer> getWineSold(String startDate, String endDate) {
+        Map<String, Integer> earnings = new LinkedHashMap<>();
+
+        String sqlEarningsStat = "SELECT date, wineQuantity FROM Sales WHERE date BETWEEN ? AND ?";
+        try (PreparedStatement earningsStatement = connection.prepareStatement(sqlEarningsStat)) {
+
+            earningsStatement.setString(1, startDate);
+            earningsStatement.setString(2, endDate);
+
+            try (ResultSet resultSet = earningsStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String dateStr = resultSet.getString("date");
+                    System.out.println(earningsStatement);
+                    int quantity = resultSet.getInt("wineQuantity");
+                    earnings.put(dateStr, quantity);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return earnings;
+    }
+
+    public static Map<String, Integer> getwalkIns(String startDate, String endDate) {
+        Map<String, Integer> earnings = new LinkedHashMap<>();
+
+        String sqlEarningsStat = "SELECT date, walkIns FROM Sales WHERE date BETWEEN ? AND ?";
+        try (PreparedStatement earningsStatement = connection.prepareStatement(sqlEarningsStat)) {
+
+            earningsStatement.setString(1, startDate);
+            earningsStatement.setString(2, endDate);
+
+            try (ResultSet resultSet = earningsStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String dateStr = resultSet.getString("date");
+                    System.out.println(earningsStatement);
+                    int quantity = resultSet.getInt("walkIns");
+                    earnings.put(dateStr, quantity);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return earnings;
+    }
+
+    public static Map<String, Integer> getOnlineBookings(String startDate, String endDate) {
+        Map<String, Integer> earnings = new LinkedHashMap<>();
+
+        String sqlEarningsStat = "SELECT date, onlineBookings FROM Sales WHERE date BETWEEN ? AND ?";
+        try (PreparedStatement earningsStatement = connection.prepareStatement(sqlEarningsStat)) {
+
+            earningsStatement.setString(1, startDate);
+            earningsStatement.setString(2, endDate);
+
+            try (ResultSet resultSet = earningsStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String dateStr = resultSet.getString("date");
+                    System.out.println(earningsStatement);
+                    int quantity = resultSet.getInt("onlineBookings");
+                    earnings.put(dateStr, quantity);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return earnings;
+    }
+
+    public static Map<String, Integer> getPhoneBookings(String startDate, String endDate) {
+        Map<String, Integer> earnings = new LinkedHashMap<>();
+
+        String sqlEarningsStat = "SELECT date, phoneBookings FROM Sales WHERE date BETWEEN ? AND ?";
+        try (PreparedStatement earningsStatement = connection.prepareStatement(sqlEarningsStat)) {
+
+            earningsStatement.setString(1, startDate);
+            earningsStatement.setString(2, endDate);
+
+            try (ResultSet resultSet = earningsStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String dateStr = resultSet.getString("date");
+                    System.out.println(earningsStatement);
+                    int quantity = resultSet.getInt("phoneBookings");
+                    earnings.put(dateStr, quantity);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return earnings;
+    }
+
+    public static Map<String, Integer> getTotalCustomers(String startDate, String endDate) {
+        Map<String, Integer> earnings = new LinkedHashMap<>();
+
+        String sqlEarningsStat = "SELECT date, totalCustomers FROM Sales WHERE date BETWEEN ? AND ?";
+        try (PreparedStatement earningsStatement = connection.prepareStatement(sqlEarningsStat)) {
+
+            earningsStatement.setString(1, startDate);
+            earningsStatement.setString(2, endDate);
+
+            try (ResultSet resultSet = earningsStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String dateStr = resultSet.getString("date");
+                    int quantity = resultSet.getInt("totalCustomers");
+                    earnings.put(dateStr, quantity);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return earnings;
+    }
+
+    public static void deleteIngredient(Ingredient ingredient) {
+        String sqldelete = "DELETE FROM OrderedItem WHERE ingredientId = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sqldelete)) {
+            statement.setInt(1, ingredient.getID());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

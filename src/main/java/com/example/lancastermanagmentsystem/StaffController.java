@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class StaffController implements Initializable {
 
     @FXML
@@ -68,7 +70,9 @@ public class StaffController implements Initializable {
     static ArrayList<String> admins = new ArrayList<>();
 
 
-
+    /**
+     * Initializes Statistics page including all its buttons and components.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -279,12 +283,17 @@ public class StaffController implements Initializable {
 
 
     }
-
+    /**
+     * @return current time yyyy-MM-dd.
+     */
     public static LocalDate LOCAL_DATE(String dateString){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(dateString, formatter);
     }
 
+    /**
+     * @return if all fields in form are completed.
+     */
     private boolean checkComplete(){
         if  (!(editName.getText().isEmpty() ||
                 editSurname.getText().isEmpty() ||
@@ -303,7 +312,9 @@ public class StaffController implements Initializable {
         };
         return false;
     }
-
+    /**
+     * Handle staff data input.
+     */
     private void handle(ActionEvent e) {
         if(checkComplete()) {
             if (creatingStaff) {

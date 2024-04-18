@@ -139,11 +139,11 @@
                         <InnerShadow />
                      </effect>
                   </LineChart>
-                  <DatePicker layoutX="466.0" layoutY="46.0" prefHeight="64.0" prefWidth="300.0" promptText="Select Ending Date" AnchorPane.rightAnchor="59.0">
+                  <DatePicker fx:id="endDate" layoutX="466.0" layoutY="46.0" prefHeight="64.0" prefWidth="300.0" promptText="Select Ending Date" AnchorPane.rightAnchor="59.0">
                      <effect>
                         <InnerShadow height="15.0" radius="7.0" width="15.0" />
                      </effect></DatePicker>
-                  <DatePicker layoutX="90.0" layoutY="47.0" prefHeight="64.0" prefWidth="300.0" promptText="Select Starting Date">
+                  <DatePicker fx:id="startDate" layoutX="90.0" layoutY="47.0" prefHeight="64.0" prefWidth="300.0" promptText="Select Starting Date">
                      <effect>
                         <InnerShadow height="15.0" radius="7.0" width="15.0" />
                      </effect></DatePicker>

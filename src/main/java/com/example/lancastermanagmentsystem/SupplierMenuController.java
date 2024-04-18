@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class SupplierMenuController implements Initializable {
 
     @FXML
@@ -76,9 +79,9 @@ public class SupplierMenuController implements Initializable {
 
     ObservableList<Ingredient> selectedIngredientsList = FXCollections.observableArrayList();
 
-
-
-
+    /**
+     * Initializes Supplier page including all its buttons and components.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         user.setText(LoginController.user);
@@ -175,6 +178,9 @@ public class SupplierMenuController implements Initializable {
 
     }
 
+    /**
+     * Set the text field with data from selected item.
+     */
     @FXML
     void selected(MouseEvent event){
         Order order = orderTable.getSelectionModel().getSelectedItem();
@@ -185,6 +191,9 @@ public class SupplierMenuController implements Initializable {
         typeField.setText(order.getType());
 
     }
+    /**
+     * Load order from database from a specific date.
+     */
     @FXML
     void searchMenu(){
         String date = datePicker.getValue().toString();
@@ -192,17 +201,25 @@ public class SupplierMenuController implements Initializable {
         orderTable.setItems(orderList);
     }
 
+    /**
+     * Enable default page pane.
+     */
     @FXML
     void backToSearch(){
         newOrderPane.setVisible(false);
         searchOrderPane.setVisible(true);
     }
-
+    /**
+     * Enable new order page pane.
+     */
     @FXML
     void setNewOrder(){
         newOrderPane.setVisible(true);
         searchOrderPane.setVisible(false);
     }
+    /**
+     * Set a max quantity limit on each ingredient.
+     */
     @FXML
     void loadMax(){
         String ingredientName = newIngredients.getValue();
@@ -219,7 +236,9 @@ public class SupplierMenuController implements Initializable {
         newQuantity.setValueFactory(valueFactory);
         newType.setText(selectedIngredient.getType());
     }
-
+    /**
+     * Add new ingredient to order table.
+     */
     @FXML
     void updateNewTable(){
         selectedIngredient.setOrdered(newQuantity.getValue());
@@ -227,13 +246,17 @@ public class SupplierMenuController implements Initializable {
         selectedIngredientsList.add(selectedIngredient);
         newOrderTable.setItems(selectedIngredientsList);
     }
-
+    /**
+     * Remove ingredient from table.
+     */
     @FXML
     void removeNewIngredient(){
         selectedIngredient = newOrderTable.getSelectionModel().getSelectedItem();
         newOrderTable.getItems().remove(selectedIngredient);
     }
-
+    /**
+     * Store order to database.
+     */
     @FXML
     void storeOrder(){
         searchOrderPane.setVisible(true);
@@ -241,4 +264,5 @@ public class SupplierMenuController implements Initializable {
         ObservableList <Ingredient> order = newOrderTable.getItems();
         DatabaseConnectivity.insertOrder(order);
     }
+
 }

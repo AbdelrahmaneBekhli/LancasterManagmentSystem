@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -77,12 +78,22 @@ public class DashboardController implements Initializable {
             }
         });
 
+        int walkIns = 0;
+        int onlineBookings = 0;
+        int phoneBookings = 0;
+        ArrayList<ArrayList<Integer>> data = DatabaseConnectivity.bookingsStats();
+        for (ArrayList<Integer> innerList : data) {
+            walkIns += innerList.get(0);
+            onlineBookings += innerList.get(1);
+            phoneBookings += innerList.get(2);
+        }
+
 
         // Create an observable list to store the data for the pie chart
        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-              new PieChart.Data("Category 1", 30),
-               new PieChart.Data("Category 2", 20),
-               new PieChart.Data("Category 3", 50)
+              new PieChart.Data("WalkIns", walkIns),
+               new PieChart.Data("Online Bookings", onlineBookings),
+               new PieChart.Data("Phone Bookings", phoneBookings)
        );
 
        // Add the data to the pie chart
@@ -90,10 +101,10 @@ public class DashboardController implements Initializable {
 
         ButtonImage dashboardButtonImage = new ButtonImage(dashboard, "Dashboard", true);
         ButtonImage menuButtonImage = new ButtonImage(menu, "Menu");
-        ButtonImage graphButtonImage = new ButtonImage(statistics, "statistics");
+        ButtonImage graphButtonImage = new ButtonImage(statistics, "Statistics");
         ButtonImage supplierButtonImage = new ButtonImage(supplier, "Supplier");
         ButtonImage staffButtonImage = new ButtonImage(staff, "Staff");
-        ButtonImage logoutButtonImage = new ButtonImage(logout, "logout");
+        ButtonImage logoutButtonImage = new ButtonImage(logout, "Logout");
 
         dashboardButtonImage.setGraphics();
         menuButtonImage.setGraphics();
