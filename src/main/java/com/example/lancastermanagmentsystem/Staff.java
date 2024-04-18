@@ -1,7 +1,9 @@
 package com.example.lancastermanagmentsystem;
 
 import java.util.ArrayList;
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class Staff {
     private final int ID;
     private String Name;
@@ -14,6 +16,18 @@ public class Staff {
     private ArrayList<String> roles;
     private String password;
 
+    /**
+     * Constructor.
+     * @param ID StaffID.
+     * @param name Staff name.
+     * @param surname Staff surname.
+     * @param phoneNumber Staff phone number.
+     * @param email Staff email address.
+     * @param dateOfBirth Staff date of birth.
+     * @param roles Array of all staff's roles.
+     * @param holiday Binary to check whether staff is on holiday.
+     * @param remainingHoliday Counter for remaining staff holiday.
+     */
     public Staff(int ID, String name, String surname, String phoneNumber, String email,String dateOfBirth, ArrayList<String> roles, int holiday, int remainingHoliday) {
         this.ID = ID;
         this.Name = name;
@@ -26,38 +40,65 @@ public class Staff {
         this.roles = roles;
     }
 
+    /**
+     * Set ID.
+     */
     public int getID() {
         return ID;
     }
 
+    /**
+     * @return staff's name.
+     */
     public String getName() {
         return Name;
     }
 
+    /**
+     * Set staff's name.
+     */
     public void setName(String name) {
         Name = name;
     }
 
+    /**
+     * @return Staff's surname.
+     */
     public String getSurname() {
         return Surname;
     }
 
+    /**
+     * Set staff's surname.
+     */
     public void setSurname(String surname) {
         Surname = surname;
     }
 
+    /**
+     * Set staff's password.
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * @return Staff's password.
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * @return Staff's surname.
+     */
     public String getDateOfBirth() {
         return DateOfBirth;
     }
 
+    /**
+     * @return Staff's surname.
+     */
     public void setDateOfBirth(String dateOfBirth) {
         DateOfBirth = dateOfBirth;
     }

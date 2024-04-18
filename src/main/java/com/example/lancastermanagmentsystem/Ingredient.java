@@ -7,14 +7,14 @@ public class Ingredient {
     private int Quantity;
     private float price;
     private boolean vegan;
-    private boolean allergen;
+    private String allergen;
     private String type;
 
     private int ordered;
     private float totalPrice;
 
 
-    public Ingredient(int ID, String ingredientName, int quantity, float price, boolean vegan, boolean allergen, String type) {
+    public Ingredient(int ID, String ingredientName, int quantity, float price, boolean vegan, String allergen, String type) {
         this.ID = ID;
         name = ingredientName;
         Quantity = quantity;
@@ -84,11 +84,11 @@ public class Ingredient {
         this.vegan = vegan;
     }
 
-    public boolean isAllergen() {
+    public String isAllergen() {
         return allergen;
     }
 
-    public void setAllergen(boolean allergen) {
+    public void setAllergen(String allergen) {
         this.allergen = allergen;
     }
 

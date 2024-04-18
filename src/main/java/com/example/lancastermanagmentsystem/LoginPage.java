@@ -23,29 +23,29 @@ public class LoginPage extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-//
-//        ArrayList<DishInfo> firstCourse = new ArrayList<>();
-//        ArrayList<DishInfo> secondCourse = new ArrayList<>();
-//        ArrayList<DishInfo> thirdCourse = new ArrayList<>();
-//
-//        for (int i = 0; i < 4; i++) {
-//            DishInfo dish = new DishInfo("Dish name", 12, "Description", "recommended wine");
-//            firstCourse.add(dish);
-//        }
-//        for (int i = 0; i < 4; i++) {
-//            DishInfo dish = new DishInfo("Dish name", 12, "Description", "recommended wine");
-//            secondCourse.add(dish);
-//        }
-//        for (int i = 0; i < 4; i++) {
-//            DishInfo dish = new DishInfo("Dish name", 12, "Description", "recommended wine");
-//            thirdCourse.add(dish);
-//        }
-//
-//        PDFWriter p = new PDFWriter();
-//        p.addFirstCourse(firstCourse);
-//        p.addSecondCourse(secondCourse);
-//        p.addThirdCourse(thirdCourse);
-//        p.generatePdf();
+
+        ArrayList<DishInfo> firstCourse = new ArrayList<>();
+        ArrayList<DishInfo> secondCourse = new ArrayList<>();
+        ArrayList<DishInfo> thirdCourse = new ArrayList<>();
+
+        for (int i = 0; i < 4; i++) {
+            DishInfo dish = new DishInfo("Dish name", 12, "Description", "recommended wine");
+            firstCourse.add(dish);
+        }
+        for (int i = 0; i < 4; i++) {
+            DishInfo dish = new DishInfo("Dish name", 12, "Description", "recommended wine");
+            secondCourse.add(dish);
+        }
+        for (int i = 0; i < 4; i++) {
+            DishInfo dish = new DishInfo("Dish name", 12, "Description", "recommended wine");
+            thirdCourse.add(dish);
+        }
+
+        PDFWriter p = new PDFWriter();
+        p.addFirstCourse(firstCourse);
+        p.addSecondCourse(secondCourse);
+        p.addThirdCourse(thirdCourse);
+        p.generatePdf();
 
         LoginPage.stage = stage;
         Parent loginFxml = new FXMLLoader(getClass().getResource("Login.fxml")).load();
