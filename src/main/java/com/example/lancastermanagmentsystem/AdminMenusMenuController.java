@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class AdminMenusMenuController implements Initializable {
     @FXML
     Button dashboard, menu, statistics, supplier, staff, logout;
@@ -16,6 +19,9 @@ public class AdminMenusMenuController implements Initializable {
     @FXML
     Text user, dateTime;
 
+    /**
+     * Initializes Statistics page including all its buttons and components.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         user.setText(LoginController.user);

@@ -13,7 +13,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class DatabaseConnectivity {
     private static Connection connection = null;
     private Statement statement = null;
@@ -26,6 +28,10 @@ public class DatabaseConnectivity {
     private static String username = "in2033t15_a";
     private static String password = "TYZVS1GIk-Y";
 
+    /**
+     * connects to database.
+     * @return connection to database status.
+     */
     public static boolean startConnection() {
         connection = null;
 
@@ -44,6 +50,10 @@ public class DatabaseConnectivity {
         return false;
     }
 
+    /**
+     * retrieve all users that can login.
+     * @return available users to login.
+     */
     public static List<String[]> retrieveLogin() {
         List<String[]> userList = new ArrayList<>();
         String sqlQuery = "SELECT " +
@@ -76,6 +86,12 @@ public class DatabaseConnectivity {
         return userList;
     }
 
+    /**
+     * check if password is correct.
+     * @return check if password matches login.
+     * @param id staff ID.
+     * @param password entered password.
+     */
     public static boolean checkPassword(String id, String password) {
         String sqlQuery = "SELECT " +
                 "l.password AS password " + // Added space after the column name
@@ -98,6 +114,10 @@ public class DatabaseConnectivity {
         }
     }
 
+    /**
+     * retrieve all existing staff.
+     * @return retrieve all existing staff.
+     */
     public static ArrayList<Staff> retrieveStaff() {
         ArrayList<Staff> staffList = new ArrayList<>();
         String sqlQuery = "SELECT Staff.id, Staff.firstName, Staff.secondName, Staff.phone, " +
@@ -147,6 +167,10 @@ public class DatabaseConnectivity {
         return staffList;
     }
 
+    /**
+     * retrieve supplier stock.
+     * @return supplier stock.
+     */
     public static ArrayList<Ingredient> retrieveSupplierStock() {
         ArrayList<Ingredient> ingredientsList = new ArrayList<>();
         String query = "SELECT " +
@@ -182,6 +206,10 @@ public class DatabaseConnectivity {
         return ingredientsList;
     }
 
+    /**
+     * retrieve all existing orders.
+     * @return retrieve all orders.
+     */
     public static ArrayList<Order> retrieveOrder() {
         ArrayList<Order> orderList = new ArrayList<>();
         String query = "SELECT " +
@@ -221,6 +249,11 @@ public class DatabaseConnectivity {
         return orderList;
     }
 
+    /**
+     * search for a specific order.
+     * @return search for a specific order.
+     * @param date date of order.
+     */
     public static ArrayList<Order> searchOrder(String date) {
         ArrayList<Order> orderList = new ArrayList<>();
         String query = "SELECT " +
@@ -263,6 +296,10 @@ public class DatabaseConnectivity {
     }
 
 
+    /**
+     * retrieve all available roles.
+     * @return retrieve all existing staff roles.
+     */
     public static ArrayList<String> retrieveRoles() {
         ArrayList<String> roles = new ArrayList<>();
         String sqlQuery = "SELECT " +
@@ -281,6 +318,10 @@ public class DatabaseConnectivity {
         return roles;
     }
 
+    /**
+     * update staff information.
+     * @param staff staff object.
+     */
     public static void updateStaffTable(Staff staff) {
         String sqlQuery = "UPDATE Staff SET " +
                 "firstName = ?, " +
@@ -319,6 +360,10 @@ public class DatabaseConnectivity {
         }
     }
 
+    /**
+     * add staff to database.
+     * @return retrieve all existing staff.
+     */
     public static void addStaff(Staff staff) {
         String sqlQueryInsert = "INSERT INTO Staff (firstName, secondName, phone, email, dob, holiday, remainingHolidays)" +
                 "VALUES (?, ?, ?, ?, ?, 0, ?)";
@@ -363,6 +408,10 @@ public class DatabaseConnectivity {
         }
     }
 
+    /**
+     * add order to database.
+     * @param list order list.
+     */
     public static void insertOrder(ObservableList<Ingredient> list) {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -424,6 +473,10 @@ public class DatabaseConnectivity {
 
     }
 
+    /**
+     * retrieve available staff.
+     * @return all available staff.
+     */
     public static int getAvailableStaff() {
         int num = 0;
         String sqlgetAvailableStaff = "SELECT COUNT(*) AS count_staff_with_zero_holiday " +
@@ -441,7 +494,10 @@ public class DatabaseConnectivity {
         }
         return num;
     }
-
+    /**
+     * remove a staff member from database.
+     * @param staff staff object.
+     */
     public static void deleteStaff(Staff staff) {
         try (Statement disableStatement = connection.createStatement()) {
             disableStatement.executeUpdate("SET FOREIGN_KEY_CHECKS=0");
@@ -478,6 +534,15 @@ public class DatabaseConnectivity {
         }
     }
 
+    /**
+     * add/update staff's role
+     * @param staff staff object.
+     * @param initialRole staff's initial role.
+     * @param newRole staff's new role.
+     * @param password staff's password
+     * @param removeLogin boolean whether a staff needs a login to be removed.
+     * @param addLogin boolean whether a staff needs a login.
+     */
     public static void updateStaffRole(Staff staff, String initialRole, String newRole, String password, boolean removeLogin, boolean addLogin) {
         String Password = password;
 
@@ -554,6 +619,10 @@ public class DatabaseConnectivity {
         }
     }
 
+    /**
+     * retrieve booking stats.
+     * @return booking stats.
+     */
     public static ArrayList<ArrayList<Integer>> bookingsStats() {
         String sqlBookingsStat = "SELECT walkIns, onlineBookings, phoneBookings FROM Sales";
         ArrayList<ArrayList<Integer>> bookingsStats = new ArrayList<>();
@@ -575,6 +644,11 @@ public class DatabaseConnectivity {
 
     ;
 
+    /**
+     * retrieve total earnings between 2 dates.
+     * @param startDate start date.
+     * @param endDate end date.
+     */
     public static Map<String, Integer> getEarnings(String startDate, String endDate) {
         Map<String, Integer> earnings = new LinkedHashMap<>();
 
@@ -598,6 +672,11 @@ public class DatabaseConnectivity {
         return earnings;
     }
 
+    /**
+     * retrieve total dish sold between 2 dates.
+     * @param startDate start date.
+     * @param endDate end date.
+     */
     public static Map<String, Integer> getDishSold(String startDate, String endDate) {
         Map<String, Integer> earnings = new LinkedHashMap<>();
 
@@ -622,6 +701,11 @@ public class DatabaseConnectivity {
         return earnings;
     }
 
+    /**
+     * retrieve total wine sold between 2 dates.
+     * @param startDate start date.
+     * @param endDate end date.
+     */
     public static Map<String, Integer> getWineSold(String startDate, String endDate) {
         Map<String, Integer> earnings = new LinkedHashMap<>();
 
@@ -645,6 +729,11 @@ public class DatabaseConnectivity {
         return earnings;
     }
 
+    /**
+     * retrieve total walkIns between 2 dates.
+     * @param startDate start date.
+     * @param endDate end date.
+     */
     public static Map<String, Integer> getwalkIns(String startDate, String endDate) {
         Map<String, Integer> earnings = new LinkedHashMap<>();
 
@@ -668,6 +757,11 @@ public class DatabaseConnectivity {
         return earnings;
     }
 
+    /**
+     * retrieve total online bookings between 2 dates.
+     * @param startDate start date.
+     * @param endDate end date.
+     */
     public static Map<String, Integer> getOnlineBookings(String startDate, String endDate) {
         Map<String, Integer> earnings = new LinkedHashMap<>();
 
@@ -691,6 +785,11 @@ public class DatabaseConnectivity {
         return earnings;
     }
 
+    /**
+     * retrieve total phone bookings between 2 dates.
+     * @param startDate start date.
+     * @param endDate end date.
+     */
     public static Map<String, Integer> getPhoneBookings(String startDate, String endDate) {
         Map<String, Integer> earnings = new LinkedHashMap<>();
 
@@ -714,6 +813,11 @@ public class DatabaseConnectivity {
         return earnings;
     }
 
+    /**
+     * retrieve total customer count between 2 dates.
+     * @param startDate start date.
+     * @param endDate end date.
+     */
     public static Map<String, Integer> getTotalCustomers(String startDate, String endDate) {
         Map<String, Integer> earnings = new LinkedHashMap<>();
 
@@ -736,6 +840,10 @@ public class DatabaseConnectivity {
         return earnings;
     }
 
+    /**
+     * delete ingredient from database.
+     * @param ingredient ingredient object.
+     */
     public static void deleteIngredient(Ingredient ingredient) {
         String sqldelete = "DELETE FROM OrderedItem WHERE ingredientId = ?";
         try (PreparedStatement statement = connection.prepareStatement(sqldelete)) {

@@ -15,7 +15,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class DashboardController implements Initializable {
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
+public class    DashboardController implements Initializable {
 
     @FXML
     PieChart pie;
@@ -29,7 +32,9 @@ public class DashboardController implements Initializable {
     @FXML
     LineChart<String, Number> earningsGraph;
 
-
+    /**
+     * Initializes Statistics page including all its buttons and components.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         user.setText(LoginController.user);
@@ -117,7 +122,7 @@ public class DashboardController implements Initializable {
         series1.getData().add(new XYChart.Data<>("Category 1", 30));
         series1.getData().add(new XYChart.Data<>("Category 2", 20));
         series1.getData().add(new XYChart.Data<>("Category 3", 40));
-        series1.getData().add(new XYChart.Data<>("Category 4", 50));
+        series1.getData().add(new XYChart.Data<>("Category 4", 50)) ;
         series1.getData().add(new XYChart.Data<>("Category 5", 35));
         series1.getData().add(new XYChart.Data<>("Category 6", 45));
         series1.getData().add(new XYChart.Data<>("Category 7", 55));

@@ -10,6 +10,9 @@ import javafx.scene.text.Font;
 
 import java.io.InputStream;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class ButtonImage {
     private final Button button;
     private final ImageView butttonImage;
@@ -20,7 +23,11 @@ public class ButtonImage {
     private final Label buttonLabel;
     private Boolean selected = false;
 
-
+    /**
+     * Constructor.
+     * @param button button to edit.
+     * @param label text to go on button.
+     */
     public ButtonImage(Button button, String label) {
         this.button = button;
         this.buttonLabel = new Label(label);
@@ -39,6 +46,12 @@ public class ButtonImage {
         butttonImage = new ImageView(orgButtonImage);
     }
 
+    /**
+     * Constructor.
+     * @param button button to edit.
+     * @param label text to go on button.
+     * @param selected is the page selected.
+     */
     public ButtonImage(Button button, String label, boolean selected) {
         this.button = button;
         this.buttonLabel = new Label(label);
@@ -68,12 +81,18 @@ public class ButtonImage {
         butttonImage = new ImageView(orgButtonImage);
     }
 
+    /**
+     * Set the button to have a background.
+     */
     private void setBackground(){
         button.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY)));
         butttonImage.setFitWidth(button.getPrefWidth());
         butttonImage.setFitHeight(button.getPrefHeight());
     }
 
+    /**
+     * Set button to have a hover image.
+     */
     private void setAnimation(){
         if(!selected) {
             button.setOnMouseEntered(event -> butttonImage.setImage(hoverButtonImage));
@@ -81,6 +100,9 @@ public class ButtonImage {
         }
     }
 
+    /**
+     * add all graphics to the button.
+     */
     public void setGraphics(){
         setBackground();
         setAnimation();

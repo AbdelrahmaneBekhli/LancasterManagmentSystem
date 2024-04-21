@@ -15,6 +15,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class LoginController implements Initializable {
     @FXML
     ComboBox<String> loginSelection;
@@ -31,6 +34,9 @@ public class LoginController implements Initializable {
     public static boolean launch;
     public static String user;
 
+    /**
+     * Initialize all components on the FXML file to do what's expected.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String[]> users = new ArrayList<>();
@@ -117,10 +123,18 @@ public class LoginController implements Initializable {
 
     }
 
+    /**
+     * @param str letter
+     * @return is letter a number.
+     */
     private boolean isNumeric(String str) {
         return str.matches("\\d+");
     }
 
+    /**
+     * Add character to password field.
+     * @param character character entered.
+     */
     private void appendCharacter(String character) {
         password.appendText(character);
     }

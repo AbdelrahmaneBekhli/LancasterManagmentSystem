@@ -16,11 +16,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class LoginPage extends Application {
 
     public static Stage stage;
     public static DatabaseConnectivity database = new DatabaseConnectivity();
-
+    /**
+     * Create a stage window.
+     */
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -63,10 +68,16 @@ public class LoginPage extends Application {
 
     }
 
+    /**
+     * @return width of the stage.
+     */
     public static double get_width(){
         return stage.getScene().getWindow().getScene().getRoot().getBoundsInLocal().getWidth();
     }
 
+    /**
+     * @return height of the stage.
+     */
     public static double get_height(){
         return stage.getScene().getWindow().getScene().getRoot().getBoundsInLocal().getHeight();
     }
@@ -75,6 +86,9 @@ public class LoginPage extends Application {
             launch();
     }
 
+        /**
+     * Set current page to Login page.
+     */
     public static void setLoginPage() throws IOException {
         Parent loginFxml = new FXMLLoader(LoginPage.class.getResource("login.fxml")).load();
         Scene loginScene = new Scene(loginFxml, get_width(), get_height());
@@ -82,6 +96,9 @@ public class LoginPage extends Application {
         stage.setScene(loginScene);
     }
 
+    /**
+     * Set current page to Dashboard page.
+     */
     public static void setDashboardPage() throws IOException {
         Parent dashboardFxml = new FXMLLoader(LoginPage.class.getResource("Dashboard.fxml")).load();
         Scene dashboardScene = new Scene(dashboardFxml, get_width(), get_height());
@@ -89,6 +106,9 @@ public class LoginPage extends Application {
         stage.setScene(dashboardScene);
     }
 
+    /**
+     * Set current page to Dish menu page.
+     */
     public static void setMenusMenu() throws IOException {
         Parent menuFxml = new FXMLLoader(LoginPage.class.getResource("MenusMenu.fxml")).load();
         Scene menuScene = new Scene(menuFxml, get_width(), get_height());
@@ -96,6 +116,9 @@ public class LoginPage extends Application {
         stage.setScene(menuScene);
     }
 
+    /**
+     * Set current page to Statistics page.
+     */
     public static void setStatisticsPage() throws IOException {
         Parent statisticsFxml = new FXMLLoader(LoginPage.class.getResource("statistics.fxml")).load();
         Scene statisticsScene = new Scene(statisticsFxml, get_width(), get_height());
@@ -103,6 +126,9 @@ public class LoginPage extends Application {
         stage.setScene(statisticsScene);
     }
 
+    /**
+     * Set current page to Supplier page.
+     */
     public static void setSupplierPage() throws IOException {
         Parent supplierFxml = new FXMLLoader(LoginPage.class.getResource("SupplierMenu.fxml")).load();
         Scene supplierScene = new Scene(supplierFxml, get_width(), get_height());
@@ -110,6 +136,9 @@ public class LoginPage extends Application {
         stage.setScene(supplierScene);
     }
 
+    /**
+     * Set current page to Staff page.
+     */
     public static void setStaffPage() throws IOException {
         Parent supplierFxml = new FXMLLoader(LoginPage.class.getResource("Staff.fxml")).load();
         Scene supplierScene = new Scene(supplierFxml, get_width(), get_height());
@@ -117,6 +146,10 @@ public class LoginPage extends Application {
         stage.setScene(supplierScene);
     }
 
+    /**
+     * @param time text field to update.
+     * @return current date and time.
+     */
     public static Text setTime(Text time){
         LocalDateTime now = LocalDateTime.now();
 
@@ -131,12 +164,15 @@ public class LoginPage extends Application {
         return time;
     }
 
+    /**
+     * @param dateTime date and time.
+     * Updates the current day and time.
+     */
     // Method to update the date and time
-    private static Text updateDateTime(Text dateTime) {
+    private static void updateDateTime(Text dateTime) {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         dateTime.setText(now.format(formatter));
-        return dateTime;
     }
 
 
