@@ -21,12 +21,16 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class PDFWriter {
     private final PdfDocument pdf;
     private final Canvas documentCanvas;
-
     private final float courseFontSize = 18;
+    /**
+     * Constructor.
+     */
     public PDFWriter() throws IOException {
         byte[] imageBytes = Files.readAllBytes(Paths.get("src/main/resources/com/example/lancastermanagmentsystem/images/Banner.png"));
         Image image = new Image(ImageDataFactory.create(imageBytes));
@@ -59,25 +63,40 @@ public class PDFWriter {
         documentCanvas.add(image.setMarginLeft(-8));
         documentCanvas.add(title);
     }
-
+    /**
+     * Add first course to the PDF file.
+     * @param dishes array of dishes.
+     */
     public void addFirstCourse(ArrayList<DishInfo> dishes){
         Paragraph header = new Paragraph(new Text("First Course").setFontColor(new DeviceRgb(198, 150, 78))).setFontSize(courseFontSize).setMarginLeft(30);
         documentCanvas.add(header);
         documentCanvas.add(createCourse(dishes));
     }
 
+    /**
+     * Add second course to the PDF file.
+     * @param dishes array of dishes.
+     */
     public void addSecondCourse(ArrayList<DishInfo> dishes){
         Paragraph header = new Paragraph(new Text("Second Course").setFontColor(new DeviceRgb(198, 150, 78))).setFontSize(courseFontSize).setMarginLeft(30);
         documentCanvas.add(header);
         documentCanvas.add(createCourse(dishes));
     }
 
+    /**
+     * Add third course to the PDF file.
+     * @param dishes array of dishes.
+     */
     public void addThirdCourse(ArrayList<DishInfo> dishes){
         Paragraph header = new Paragraph(new Text("Third Course").setFontColor(new DeviceRgb(198, 150, 78))).setFontSize(courseFontSize).setMarginLeft(30);
         documentCanvas.add(header);
         documentCanvas.add(createCourse(dishes));
     }
 
+    /**
+     * @return table of all information (Dish, Description Ingredients, wines, price).
+     * @param dishes array of dishes.
+     */
     private Table createCourse(ArrayList<DishInfo> dishes){
         Table table = new Table(3);
         float dishFontSize = 16;
@@ -93,11 +112,11 @@ public class PDFWriter {
         return table;
     }
 
-
+    /**
+     * Closes the PDF writers to make it readable.
+     */
     public void generatePdf(){
         documentCanvas.close();
         pdf.close();
     }
-
-
 }
